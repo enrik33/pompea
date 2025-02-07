@@ -1,0 +1,503 @@
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+nav {
+    display: flex;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    justify-content: space-between;
+    background-color: aliceblue;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    box-shadow: 0 5px 10px black;
+}
+
+nav #navImg {
+    width: 40%;
+    padding-left: 30px;
+}
+
+nav #links {
+    display: flex;
+    font-size: 23px;
+    justify-content: space-evenly;
+    list-style-type: none;
+    align-content: center;
+    align-items: center;
+    width: 80%
+}
+
+li {
+    list-style: none;
+    display: flex;
+}
+
+a.nav {
+    position: relative;
+    display: inline;
+    text-decoration: none;
+    transition: 0.4s;
+    color: #003366;
+}
+
+a.nav::after {
+    position: absolute;
+    content: "";
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: #003366;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.5s;
+}
+
+a.nav:hover {
+    color: 003366;
+    opacity: 80%;
+}
+
+a.nav:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+
+.slideshow-container {
+    position: relative;
+    margin: auto;
+}
+
+.slideshow-container img {
+    width: 100%;
+}
+
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 25px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    text-shadow: 2px 2px 10px black;
+}
+
+hr {
+    color: black;
+    margin-bottom: 20px;
+}
+
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.text-overlay {
+    color: white;
+    font-size: 30px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    position: absolute;
+    bottom: 200px;
+    left: 100px;
+    text-align: left;
+    text-shadow: 2px 2px 10px black;
+}
+
+/* Dots */
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 5px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.active,
+.dot:hover {
+    background-color: #003366;
+}
+
+/* CTA Section */
+.cta-section {
+    text-align: center;
+    margin-top: 30px;
+    padding: 30px;
+    background-color: #003366;
+    color: white;
+    border-radius: 10px;
+}
+
+.cta-section h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.cta-section p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.cta-button {
+    background-color: #ffcc00;
+    border: none;
+    padding: 12px 24px;
+    font-size: 18px;
+    color: #003366;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+    background-color: #ff9900;
+}
+
+/* Why Us Section */
+.why-us-section {
+    margin: 50px auto;
+    padding: 40px 30px;
+    max-width: 900px;
+    background-color: #f0f8ff;
+    border-left: 6px solid #003366;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.why-us-section h2 {
+    font-size: 36px;
+    color: #003366;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.why-us-section p {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #333333;
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+.why-us-section ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.why-us-section ul li {
+    font-size: 18px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    color: #333333;
+    display: flex;
+    align-items: flex-start;
+}
+
+.why-us-section ul li::before {
+    content: '\2713';
+    color: #003366;
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.why-us-section ul li strong {
+    color: #003366;
+}
+
+/* Discover & Experience Section */
+.discover-section {
+    margin: 50px auto;
+    padding: 40px;
+    max-width: 900px;
+    background-color: #f0f8ff;
+    border-left: 6px solid #003366;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.discover-section h2 {
+    font-size: 36px;
+    color: #003366;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.discover-section p {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #333333;
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+.discover-section ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.discover-section ul li {
+    font-size: 18px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    color: #333333;
+    display: flex;
+    align-items: flex-start;
+}
+
+.discover-section ul li::before {
+    content: '\2713';
+    color: #003366;
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.discover-section ul li strong {
+    color: #003366;
+}
+
+.options {
+    background-color: #003366;
+    display: flex;
+    margin-top: 30px;
+}
+
+h2 {
+    padding-bottom: 10px;
+}
+
+.items {
+    padding: 20px;
+    text-align: center;
+    color: aliceblue;
+    transition: font-size 0.5s;
+    cursor: default;
+}
+
+.items:hover {
+    font-size: 18px;
+}
+
+/* Tours Page Quiz Banner */
+.quiz-button {
+    background-color: #00509e;
+    border: none;
+    padding: 12px 24px;
+    font-size: 18px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.quiz-button:hover {
+    background-color: #0077cc;
+}
+
+.quiz-banner {
+    text-align: center;
+    background-color: #004080;
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+}
+
+.quiz-banner p {
+    font-size: 18px;
+    color: white;
+    margin-bottom: 10px;
+}
+
+.quiz-banner .quiz-button {
+    background-color: #00509e;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.quiz-banner .quiz-button:hover {
+    background-color: #0077cc;
+}
+
+/* #tours  */
+.tours-header {
+    color: aliceblue;
+    background-color: #582E3A;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.tours-images {
+    position: relative;
+    margin-left: 100px;
+    width: 400px;
+    height: 300px;
+    transition: transform .3s;
+    cursor: pointer;
+}
+
+.image {
+    width: 400px;
+    height: 300px;
+}
+
+.tours-images:hover {
+    -ms-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 50px;
+}
+
+.text-block {
+    position: absolute;
+    bottom: 80px;
+    background-color: #572E3A;
+    opacity: 90%;
+    color: white;
+    font-size: 23px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: center;
+    max-inline-size: 150px;
+    padding: 10px 20px 10px 20px;
+}
+
+.reviews-header {
+    text-align: center;
+    font-size: 36px;
+    color: #582E3A;
+    margin: 40px 0;
+}
+
+/* Reviews Section */
+.reviews-header {
+    text-align: center;
+    font-size: 36px;
+    color: #582E3A;
+    margin: 40px 0;
+}
+
+.reviews-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    background-color: #F9F9F9;
+}
+
+.review-card {
+    background-color: #FFFFFF;
+    border: 1px solid #D8D8D8;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.review-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.review-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    border: 2px solid #D8D8D8;
+}
+
+.review-text {
+    font-size: 16px;
+    color: #333333;
+    margin-bottom: 15px;
+    font-style: italic;
+}
+
+.review-author {
+    font-size: 14px;
+    font-weight: bold;
+    color: #572E3A;
+    margin-bottom: 10px;
+}
+
+.review-stars {
+    font-size: 16px;
+    color: #FFD700; /* Gold color for stars */
+}
+
+/* #contact */
+
+.contact-header {
+    color: aliceblue;
+    background-color: #582E3A;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+
+.links {
+    text-align: center;
+    margin: 30px;
+}
+
+.copyright {
+    padding-top: 20px;
+    padding-bottom: 30px;
+    color: #572E3A;
+    font-size: 22px;
+}
+
+.social {
+    display: flex;
+    justify-content: center;
+    column-gap: 70px;
+}
+
+a.insta:hover,
+a.facebook:hover,
+a.gmail:hover {
+    opacity: 90%;
+    transition: 0.5s;
+    transform: scale(1.3);
+}
