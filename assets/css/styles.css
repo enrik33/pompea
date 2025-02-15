@@ -92,15 +92,18 @@ a.nav:hover::after {
     cursor: pointer;
     position: absolute;
     top: 50%;
-    margin-top: -22px;
-    padding: 16px;
+    width: auto;
+    padding: 20px; 
+    margin-top: -30px; 
     color: white;
     font-weight: bold;
-    font-size: 25px;
+    font-size: 24px;
     transition: 0.6s ease;
     border-radius: 0 3px 3px 0;
     user-select: none;
-    text-shadow: 2px 2px 10px black;
+    border: none;
+    background: none; 
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 1);
 }
 
 hr {
@@ -111,6 +114,10 @@ hr {
 .next {
     right: 0;
     border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+    text-shadow: 4px 4px 8px rgba(0, 0, 0, 1); /* Darker shadow on hover */
 }
 
 .text-overlay {
