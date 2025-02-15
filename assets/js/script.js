@@ -1,26 +1,38 @@
-let slideIndex = 1;
-showSlides(slideIndex);
+(function() {
+    let slideIndex = 1;
+    showSlides(slideIndex);
 
-function plusSlides(n) {
-    showSlides(slideIndex += n);
-}
+    document.querySelectorAll('.prev').forEach(button => {
+        button.addEventListener('click', () => plusSlides(-1));
+    });
 
-function currentSlide(n) {
-    showSlides(slideIndex = n);
-}
+    document.querySelectorAll('.next').forEach(button => {
+        button.addEventListener('click', () => plusSlides(1));
+    });
 
-function showSlides(n) {
-    let i;
-    let slides = document.getElementsByClassName("mySlides");
-    let dots = document.getElementsByClassName("dot");
-    if (n > slides.length) { slideIndex = 1 }
-    if (n < 1) { slideIndex = slides.length }
-    for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
+    document.querySelectorAll('.dot').forEach((dot, index) => {
+        dot.addEventListener('click', () => currentSlide(index + 1));
+    });
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
     }
-    for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
     }
-    slides[slideIndex - 1].style.display = "block";
-    dots[slideIndex - 1].className += " active";
-}
+
+    function showSlides(n) {
+        const slides = document.querySelectorAll(".mySlides");
+        const dots = document.querySelectorAll(".dot");
+
+        if (n > slides.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = slides.length }
+
+        slides.forEach(slide => slide.style.display = "none");
+        dots.forEach(dot => dot.classList.remove("active"));
+
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].classList.add("active");
+    }
+})();
