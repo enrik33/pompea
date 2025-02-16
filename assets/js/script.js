@@ -37,4 +37,9 @@
         slides[slideIndex - 1].style.display = "block";
         dots[slideIndex - 1].classList.add("active");
     }
+
+    setInterval(() => {
+        plusSlides(1);
+    }, 5000); // Change slide every 5 seconds
+    
 })();

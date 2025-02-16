@@ -36,6 +36,7 @@ nav #links {
     justify-content: space-evenly;
     align-items: center;
     width: 80%;
+    flex-wrap: wrap;
 }
 
 a.nav {
@@ -161,11 +162,12 @@ a.nav:hover::after {
     color: #003366;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
 .cta-button:hover {
     background-color: #ff9900;
+    transform: scale(1.05);
 }
 
 /* Why Us Section */
