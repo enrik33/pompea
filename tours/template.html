@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tour Details - [Tour Name]</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <script src="../assets/js/script.js" defer></script>
+</head>
+
+<body>
+    <nav>
+        <a href="../index.html">Home</a>
+        <a href="../#tours">Tours</a>
+        <a href="../#contact">Contact</a>
+    </nav>
+
+    <header class="tour-header">
+        <h1>[Tour Name]</h1>
+        <p>[Short description of the tour]</p>
+    </header>
+
+    <section class="tour-hero">
+        <img src="../assets/images/[tour-image].jpg" alt="[Tour Name]">
+    </section>
+
+    <section class="tour-details">
+        <h2>About the Tour</h2>
+        <p>[Full tour description goes here]</p>
+    </section>
+
+    <section class="tour-itinerary">
+        <h2>Itinerary</h2>
+        <ul>
+            <li><strong>Stop 1:</strong> [Location] - [Description]</li>
+            <li><strong>Stop 2:</strong> [Location] - [Description]</li>
+            <li><strong>Stop 3:</strong> [Location] - [Description]</li>
+        </ul>
+    </section>
+
+    <section class="tour-includes">
+        <h2>What's Included</h2>
+        <ul>
+            <li>✔ Entry Tickets</li>
+            <li>✔ Professional Tour Guide</li>
+            <li>✔ Transportation</li>
+            <li>✔ Lunch/Dinner (if applicable)</li>
+        </ul>
+    </section>
+
+    <section class="tour-booking">
+        <h2>Book This Tour</h2>
+        <form action="../booking/checkout.html" method="POST">
+            <label for="date">Select Date:</label>
+            <input type="date" id="date" name="date" required>
+            
+            <label for="people">Number of People:</label>
+            <input type="number" id="people" name="people" min="1" required>
+            
+            <button type="submit">Reserve Now</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Pompea Tours & Travel. All Rights Reserved.</p>
+    </footer>
+</body>
+
+</html>
