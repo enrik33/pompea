@@ -1,4 +1,4 @@
-(function() {
+document.addEventListener("DOMContentLoaded", function () {
     // Initialize slide index
     let slideIndex = 1;
 
@@ -25,12 +25,12 @@
     });
 
     // Pause the slideshow on mouseover
-    document.querySelector('.slideshow-container').addEventListener('mouseover', () => {
+    document.querySelector('.slideshow-container')?.addEventListener('mouseover', () => {
         clearInterval(slideInterval);
     });
 
     // Resume the slideshow on mouseout
-    document.querySelector('.slideshow-container').addEventListener('mouseout', () => {
+    document.querySelector('.slideshow-container')?.addEventListener('mouseout', () => {
         slideInterval = setInterval(() => {
             plusSlides(1);
         }, 5000);
@@ -41,12 +41,12 @@
     let touchEndX = 0;
 
     // Store the starting touch position
-    document.querySelector('.slideshow-container').addEventListener('touchstart', (event) => {
+    document.querySelector('.slideshow-container')?.addEventListener('touchstart', (event) => {
         touchStartX = event.changedTouches[0].screenX;
     });
 
     // Store the ending touch position and handle the gesture
-    document.querySelector('.slideshow-container').addEventListener('touchend', (event) => {
+    document.querySelector('.slideshow-container')?.addEventListener('touchend', (event) => {
         touchEndX = event.changedTouches[0].screenX;
         handleGesture();
     });
@@ -92,7 +92,7 @@
         slides[slideIndex - 1].style.display = "block";
         dots[slideIndex - 1].classList.add("active");
     }
-})();
+});
 
 // jQuery FAQ Toggle Implementation (Improved)
 $(document).ready(function () {
