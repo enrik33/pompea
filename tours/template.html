@@ -7,6 +7,7 @@
     <title>Basic Tour: Butrint & Blue Eye</title>
     <link rel="stylesheet" href="../assets/css/styles.css">
     <link rel="stylesheet" href="../assets/css/tour-styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../assets/js/script.js" defer></script>
     <link rel="icon" type="image/x-icon" href="../assets/images/logo_pompea-01.png">
 </head>
@@ -15,7 +16,8 @@
     <nav>
         <div id="navImg">
             <a href="../index.html">
-                <img src="../assets/images/logo_pompea-01.png" alt="Pompea Tours & Travel" style="height: 60px; vertical-align: middle;">
+                <img src="../assets/images/logo_pompea-01.png" alt="Pompea Tours & Travel"
+                    style="height: 60px; vertical-align: middle;">
             </a>
         </div>
         <div id="links">
@@ -36,11 +38,13 @@
 
     <section class="tour-details">
         <h2>About the Tour</h2>
-        <p>Our driver will pick you up from your hotel, ready to kick off an exciting day of adventure as we head to your
+        <p>Our driver will pick you up from your hotel, ready to kick off an exciting day of adventure as we head to
+            your
             first stop: the enchanting ancient city of Butrint. Accompanied by our knowledgeable and passionate tour
             guides, you’ll dive into the rich history and stories that make this place so special.</p>
         <p>Our journey continues to Lekuresi Castle, where you’ll get to absorb the captivating history of this historic
-            landmark that overlooks the city. Don’t forget to capture those Instagram-worthy shots of the stunning views!</p>
+            landmark that overlooks the city. Don’t forget to capture those Instagram-worthy shots of the stunning
+            views!</p>
         <p>Next, your tour continues to the stunning Blue Eye, a mesmerizing natural spring with vibrant turquoise
             waters. You'll be captivated by the sight of crystal-clear waters bubbling up from the depths, creating a
             unique and enchanting spectacle. This serene spot is the perfect place for you to relax and take in the
@@ -66,15 +70,52 @@
         </ul>
     </section>
 
+    <section class="tour-reviews">
+        <h2>What Our Guests Say</h2>
+        <div class="reviews-container">
+            <div class="review-card">
+                <p class="review-text">"An unforgettable experience! The Blue Eye spring was magical, and our guide was
+                    fantastic!"</p>
+                <p class="review-author">- Maria G.</p>
+            </div>
+            <div class="review-card">
+                <p class="review-text">"Highly recommend this tour! Butrint was full of history, and the views from
+                    Lekuresi Castle were breathtaking."</p>
+                <p class="review-author">- James L.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="tour-faq">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item">
+            <button class="faq-question">Do I need to bring anything for this tour?</button>
+            <p class="faq-answer">We recommend bringing comfortable walking shoes, sunscreen, and
+                a camera for stunning photos.</p>
+        </div>
+        <div class="faq-item">
+            <button class="faq-question">Is lunch included in this tour?</button>
+            <p class="faq-answer" style="display: none;">No, but we stop at a restaurant where you can enjoy a delicious
+                local meal.</p>
+        </div>
+    </section>
+
+    <section class="tour-map">
+        <h2>Tour Locations</h2>
+        <iframe title="Tour Locations Map"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30878.68044821428!2d19.973849836946497!3d39.75876458602002!2m3!1f0!2f0!3f0!2m3!1i1024!2i768!4f13.1!3m3!1m2!1s0x135b13db870b9a2b%3A0x40092af10653770!2sButrint%2C%20Albania!5e0!3m2!1sen!2sus!4v1648103832277!5m2!1sen!2sus"
+            width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </section>
+
     <section class="tour-booking">
         <h2>Book This Tour</h2>
         <form action="../booking/checkout.html" method="POST">
             <label for="date">Select Date:</label>
             <input type="date" id="date" name="date" required>
-            
+
             <label for="people">Number of People:</label>
             <input type="number" id="people" name="people" min="1" required>
-            
+
             <button type="submit">Reserve Now</button>
         </form>
     </section>
