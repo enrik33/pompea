@@ -49,8 +49,9 @@ p, li {
     line-height: 1.6;
     color: #333;
 }
-/* Tour Reviews Section */
-.tour-reviews {
+
+/* Fun Facts Section */
+.tour-fun-facts {
     max-width: 900px;
     margin: 40px auto;
     padding: 20px;
@@ -58,35 +59,40 @@ p, li {
     border-left: 6px solid #004080;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.reviews-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-}
-
-.review-card {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 300px;
     text-align: center;
 }
 
-.review-text {
-    font-size: 16px;
-    font-style: italic;
-    color: #333;
+.tour-fun-facts h2 {
+    font-size: 28px;
+    color: #004080;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 
-.review-author {
-    font-size: 14px;
-    font-weight: bold;
-    color: #004080;
-    margin-top: 10px;
+.tour-fun-facts ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 15px;
+}
+
+.tour-fun-facts li {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.tour-fun-facts li:hover {
+    transform: scale(1.05);
 }
 
 /* FAQ Section */
