@@ -1,0 +1,155 @@
+/* General Styles */
+body {
+    background-color: #f0f8ff;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* Quiz Container */
+.quiz-container {
+    background: white;
+    width: 90%;
+    max-width: 600px;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Title */
+.quiz-container h1 {
+    font-size: 28px;
+    color: #004080;
+    margin-bottom: 20px;
+}
+
+/* Questions */
+.question {
+    background: #f8f9fa;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.question p {
+    font-size: 18px;
+    font-weight: bold;
+    color: #003366;
+}
+
+/* Button */
+button {
+    background-color: #00509e;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    margin-top: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+    background-color: #0077cc;
+    transform: scale(1.05);
+}
+
+/* Result Section */
+.result-section {
+    margin-top: 20px;
+    padding: 15px;
+    background: #dff0d8;
+    color: #004085;
+    border-left: 5px solid #28a745;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    display: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Hide default radio buttons */
+input[type="radio"] {
+    display: none;
+}
+
+/* Custom radio button styles */
+label{
+    display: flex;
+    align-items: center;
+    background: #e0e7ff;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background 0.3s ease-in-out, transform 0.2s;
+    position: relative;
+}
+
+/* Radio button before selection */
+label::before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #004080;
+    display: inline-block;
+    margin-right: 10px;
+    transition: background 0.3s ease-in-out, border 0.3s;
+}
+
+/* When radio is checked, show filled checkmark */
+input[type="radio"]:checked + label::before {
+    background: #004080;
+    border: 5px solid #e0e7ff;
+}
+
+/* Hover effect */
+label:hover {
+    background: #b3c7ff;
+    transform: scale(1.05);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .quiz-container {
+        width: 95%;
+        padding: 20px;
+    }
+
+    label {
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    label::before {
+        width: 18px;
+        height: 18px;
+    }
+
+    button {
+        font-size: 16px;
+    }
+}
