@@ -174,3 +174,86 @@ p, li {
 .tour-booking button:hover {
     background-color: #ff9900;
 }
+
+/* Timeline Styles */
+.tour-timeline {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #f0f8ff;
+    border-left: 6px solid #004080;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+}
+
+.timeline-item {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.5s ease-in-out;
+}
+
+.timeline-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Simple Google Maps Section */
+.tour-map-allday {
+    text-align: center;
+    margin: 50px auto;
+    max-width: 900px;
+    padding: 20px;
+    background: #f9f9f9;
+    border-left: 6px solid #004080;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.map-container {
+    width: 100%;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Countdown Timer */
+.tour-offer {
+    text-align: center;
+    padding: 30px;
+    background-color: #ffcc00;
+    color: #004080;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 10px;
+    margin: 50px auto;
+    max-width: 600px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+#countdown {
+    font-size: 30px;
+    margin-top: 10px;
+    color: red;
+    font-weight: bold;
+}

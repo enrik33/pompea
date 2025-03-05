@@ -1,4 +1,18 @@
 document.addEventListener("DOMContentLoaded", function () {
+    const timelineItems = document.querySelectorAll(".timeline-item");
+    
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+            }
+        });
+    }, { threshold: 0.3 });
+    
+    timelineItems.forEach(item => {
+        observer.observe(item);
+    });
+
     // Initialize slide index
     let slideIndex = 1;
 
@@ -107,3 +121,28 @@ $(document).ready(function () {
         $(this).next(".faq-answer").slideToggle();
     });
 });
+
+// JavaScript for Countdown Timer
+
+function startCountdown(durationInMinutes) {
+    let countdownElement = document.getElementById("countdown");
+    let timeRemaining = durationInMinutes * 60;
+    
+    function updateCountdown() {
+        let minutes = Math.floor(timeRemaining / 60);
+        let seconds = timeRemaining % 60;
+        countdownElement.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        
+        if (timeRemaining > 0) {
+            timeRemaining--;
+            setTimeout(updateCountdown, 1000);
+        } else {
+            countdownElement.textContent = "Offer Expired";
+        }
+    }
+    
+    updateCountdown();
+}
+
+// Start countdown for a 60-minute offer window
+startCountdown(60);
