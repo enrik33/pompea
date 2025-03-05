@@ -1,70 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Find Your Perfect Tour</title>
     <link rel="stylesheet" href="../assets/css/quiz-styles.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
     <script src="../assets/js/quiz.js" defer></script>
+    <meta name="description"
+        content="Explore Albania with Pompea Tours & Travel. Discover beautiful destinations and unforgettable experiences.">
+    <meta property="og:title" content="Pompea Tours & Travel">
+    <meta property="og:description"
+        content="Explore Albania with Pompea Tours & Travel. Discover beautiful destinations and unforgettable experiences.">
+    <meta property="og:image" content="assets/images/logo_pompea-01.png">
+    <meta property="og:url" content="https://www.pompeatours.com">
 </head>
-<body>
 
+<body>
     <nav>
         <div id="navImg">
-            <a href="index.html">
-                <img src="assets/images/logo_pompea-01.png" alt="Pompea Tours & Travel">
+            <a href="../index.html">
+                <img src="../assets/images/logo_pompea-01.png" alt="Pompea Tours & Travel" style="height: 60px;">
             </a>
+        </div>
+        <div id="links">
+            <a class="nav" href="../index.html">Homepage</a>
+            <a class="nav" href="../#tours">Tours</a>
+            <a class="nav" href="../#contact">Contact</a>
         </div>
     </nav>
 
-    <div class="quiz-container">
-        <h1>Find Your Perfect Tour</h1>
-        <form id="quizForm">
-            <div class="question">
-                <p>1. What type of experience are you looking for?</p>
-                
-                <input type="radio" id="adventure" name="experience" value="adventure">
-                <label for="adventure">Adventure</label>
-            
-                <input type="radio" id="culture" name="experience" value="culture">
-                <label for="culture">History & Culture</label>
-            
-                <input type="radio" id="relaxation" name="experience" value="relaxation">
-                <label for="relaxation">Relaxation</label>
+    <section id="quiz">
+        <div class="quiz-container">
+            <h1>Find Your Perfect Tour</h1>
+            <form id="quizForm">
+                <div class="question">
+                    <p>1. What type of experience are you looking for?</p>
+
+                    <input type="radio" id="adventure" name="experience" value="adventure">
+                    <label for="adventure">Adventure</label>
+
+                    <input type="radio" id="culture" name="experience" value="culture">
+                    <label for="culture">History & Culture</label>
+
+                    <input type="radio" id="relaxation" name="experience" value="relaxation">
+                    <label for="relaxation">Relaxation</label>
+                </div>
+
+
+                <div class="question">
+                    <p>2. How long do you want your tour to be?</p>
+
+                    <input type="radio" id="half-day" name="duration" value="half-day">
+                    <label for="half-day">Half-Day</label>
+
+                    <input type="radio" id="full-day" name="duration" value="full-day">
+                    <label for="full-day">Full-Day</label>
+
+                    <input type="radio" id="multi-day" name="duration" value="multi-day">
+                    <label for="multi-day">Multi-Day</label>
+                </div>
+
+                <div class="question">
+                    <p>3. Do you prefer visiting nature or historical landmarks?</p>
+
+                    <input type="radio" id="nature" name="preference" value="nature">
+                    <label for="nature">Nature</label>
+
+                    <input type="radio" id="history" name="preference" value="history">
+                    <label for="history">History</label>
+
+                    <input type="radio" id="both" name="preference" value="both">
+                    <label for="both">Both</label>
+                </div>
+
+                <button type="button" onclick="calculateResult()">Find My Tour</button>
+            </form>
+
+            <div id="result" class="result-section"></div>
+        </div>
+    </section>
+    
+    <section id="contact">
+        <h1 class="contact-header">CONTACT</h1>
+        <footer>
+            <div class="links">
+                <p class="copyright">&copy; 2025 All Rights Reserved - Enrik Çipa</p>
+                <div class="social">
+                    <a class="insta" href="https://www.instagram.com/riku.cipa/"><img
+                            src="../assets/images/instagram.svg" alt="instagram" width="50" height="50" /></a>
+                    <a class="facebook" href="https://www.facebook.com/profile.php?id=100084353491997"><img
+                            src="../assets/images/facebook.svg" alt="facebook" width="50" height="50" /></a>
+                    <a class="gmail" href="mailto:ec5745@rit.edu"><img src="../assets/images/gmail.svg" alt="gmail"
+                            width="50" height="50" /></a>
+                </div>
             </div>
-            
-
-            <div class="question">
-                <p>2. How long do you want your tour to be?</p>
-            
-                <input type="radio" id="half-day" name="duration" value="half-day">
-                <label for="half-day">Half-Day</label>
-            
-                <input type="radio" id="full-day" name="duration" value="full-day">
-                <label for="full-day">Full-Day</label>
-            
-                <input type="radio" id="multi-day" name="duration" value="multi-day">
-                <label for="multi-day">Multi-Day</label>
-            </div>
-            
-            <div class="question">
-                <p>3. Do you prefer visiting nature or historical landmarks?</p>
-            
-                <input type="radio" id="nature" name="preference" value="nature">
-                <label for="nature">Nature</label>
-            
-                <input type="radio" id="history" name="preference" value="history">
-                <label for="history">History</label>
-            
-                <input type="radio" id="both" name="preference" value="both">
-                <label for="both">Both</label>
-            </div>            
-
-            <button type="button" onclick="calculateResult()">Find My Tour</button>
-        </form>
-
-        <div id="result" class="result-section"></div>
-    </div>
-
+        </footer>
+    </section>
 </body>
+
 </html>
