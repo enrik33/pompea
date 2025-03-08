@@ -74,8 +74,19 @@
                     <input type="radio" id="both" name="preference" value="both">
                     <label for="both">Both</label>
                 </div>
-
-                <button type="button" onclick="calculateResult()">Find My Tour</button>
+                
+                <div id="quiz-popup" class="popup-overlay">
+                    <div class="popup-content">
+                        <h2>Confirm Your Selection</h2>
+                        <p id="quiz-summary"></p>
+                        <div class="popup-buttons">
+                            <button id="confirm-quiz">Proceed</button>
+                            <button id="cancel-quiz">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="button" id="findMyTourButton">Find My Tour</button>
             </form>
 
             <div id="result" class="result-section"></div>
