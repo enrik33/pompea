@@ -1,4 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
+    const menuToggle = document.getElementById("menu-toggle");
+    const navLinks = document.getElementById("links");
+
+    menuToggle.addEventListener("click", function () {
+        navLinks.classList.toggle("active");
+        navLinks.classList.toggle("hidden"); // Ensure it hides properly
+    });
+
     const timelineItems = document.querySelectorAll(".timeline-item");
     
     const observer = new IntersectionObserver(entries => {
