@@ -114,6 +114,22 @@ document.addEventListener("DOMContentLoaded", function () {
         slides[slideIndex - 1].style.display = "block";
         dots[slideIndex - 1].classList.add("active");
     }
+
+    function adjustSlideshow() {
+        const slideTexts = document.querySelectorAll(".text-overlay");
+        slideTexts.forEach(text => {
+            if (window.innerWidth < 768) {
+                text.style.fontSize = "4vw";
+                text.style.width = "80%";
+            } else {
+                text.style.fontSize = "2vw";
+                text.style.width = "60%";
+            }
+        });
+    }
+    
+    window.addEventListener("resize", adjustSlideshow);
+    adjustSlideshow();
 });
 
 // jQuery FAQ Toggle Implementation (Improved)

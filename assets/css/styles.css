@@ -534,6 +534,55 @@ a.gmail:hover {
         cursor: pointer;
         font-size: 28px;
     }
+
+      /* Ensure slideshow images scale correctly */
+    .slideshow-container img {
+        width: 100%;
+        height: auto;
+        max-height: 350px;
+        object-fit: cover;
+    }
+    
+    /* Fix text overlay positioning and scaling */
+    .text-overlay {
+        position: absolute;
+        bottom: 12px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 4vw;
+        color: white;
+        text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5); /* Subtle shadow for readability */
+        padding: 6px;
+        width: auto;
+        text-align: center;
+        font-weight: bold;
+    }
+    
+    /* Resize navigation arrows */
+    .prev, .next {
+        font-size: 1.8rem;
+        padding: 6px;
+    }
+    
+    /* Center indicators (dots) */
+    .slideshow-dots {
+        bottom: 15px;
+    }
+    
+    /* Ensure CTA section is well-balanced */
+    .cta-section {
+        padding: 25px 10px;
+    }
+    .cta-section h2 {
+        font-size: 5vw;
+    }
+    .cta-section p {
+        font-size: 3.8vw;
+    }
+    .cta-button {
+        font-size: 4vw;
+        padding: 10px 20px;
+    }
 }
 
 @media screen and (min-width: 769px) {
