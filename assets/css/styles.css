@@ -626,6 +626,38 @@ a.gmail:hover {
         text-align: center;
         padding: 8px 12px;
     }
+
+     /* Ensure reviews section is mobile-friendly */
+     .reviews-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        padding: 15px;
+    }
+    
+    /* Adjust review card size and spacing */
+    .review-card {
+        width: 90%; /* Ensures proper fit on mobile */
+        max-width: 350px;
+        padding: 15px;
+        text-align: center;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    .review-text {
+        font-size: 3.8vw;
+    }
+    
+    .review-image {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+    }
+    
+    .review-stars {
+        font-size: 4vw;
+    }
 }
 
 @media screen and (min-width: 769px) {
