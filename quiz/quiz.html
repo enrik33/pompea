@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../assets/css/quiz-styles.css">
     <link rel="stylesheet" href="../assets/css/styles.css">
     <script src="../assets/js/quiz.js" defer></script>
+    <script src="../assets/js/script.js" defer></script>
     <meta name="description"
         content="Explore Albania with Pompea Tours & Travel. Discover beautiful destinations and unforgettable experiences.">
     <meta property="og:title" content="Pompea Tours & Travel">
@@ -18,16 +19,17 @@
 </head>
 
 <body>
-    <nav>
+    <nav aria-label="Main Navigation">
         <div id="navImg">
-            <a href="../index.html">
-                <img src="../assets/images/logo_pompea-01.png" alt="Pompea Tours & Travel" style="height: 60px;">
+            <a href="#home">
+                <img src="../assets/images/logo_pompea-01.png" alt="Pompea Tours & Travel" id="logo">
             </a>
         </div>
-        <div id="links">
-            <a class="nav" href="../index.html">Homepage</a>
-            <a class="nav" href="../#tours">Tours</a>
-            <a class="nav" href="../#contact">Contact</a>
+        <div id="menu-toggle">☰</div>
+        <div id="links" class="hidden">
+            <a class="nav" href="#home">Homepage</a>
+            <a class="nav" href="#tours">Tours</a>
+            <a class="nav" href="#contact">Contact</a>
         </div>
     </nav>
 
@@ -74,7 +76,7 @@
                     <input type="radio" id="both" name="preference" value="both">
                     <label for="both">Both</label>
                 </div>
-                
+
                 <div id="quiz-popup" class="popup-overlay">
                     <div class="popup-content">
                         <h2>Confirm Your Selection</h2>
@@ -85,14 +87,14 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <button type="button" id="findMyTourButton">Find My Tour</button>
             </form>
 
             <div id="result" class="result-section"></div>
         </div>
     </section>
-    
+
     <section id="contact">
         <h1 class="contact-header">CONTACT</h1>
         <footer>

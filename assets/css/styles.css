@@ -76,6 +76,7 @@ a.nav:hover::after {
 
 .slideshow-container img {
     width: 100%;
+    object-fit: cover;
 }
 
 .prev,
