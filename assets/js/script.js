@@ -130,6 +130,20 @@ document.addEventListener("DOMContentLoaded", function () {
     
     window.addEventListener("resize", adjustSlideshow);
     adjustSlideshow();
+
+    function adjustTourGrid() {
+        const tourTexts = document.querySelectorAll(".text-block");
+        tourTexts.forEach(text => {
+            if (window.innerWidth < 768) {
+                text.style.fontSize = "3vw";
+            } else {
+                text.style.fontSize = "1.7vw";
+            }
+        });
+    }
+    
+    window.addEventListener("resize", adjustTourGrid);
+    adjustTourGrid();
 });
 
 // jQuery FAQ Toggle Implementation (Improved)
