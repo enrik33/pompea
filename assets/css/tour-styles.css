@@ -11,6 +11,10 @@
     transition: background-color 0.3s ease;
 }
 
+header p{
+    color: rgb(225, 191, 0);
+}
+
 /* Tour Hero Section */
 .tour-hero {
     display: flex;
