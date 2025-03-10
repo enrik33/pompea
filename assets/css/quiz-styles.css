@@ -29,6 +29,7 @@
         opacity: 0;
         transform: translateY(-20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -96,7 +97,7 @@ input[type="radio"] {
 }
 
 /* Custom radio button styles */
-label{
+label {
     display: flex;
     align-items: center;
     background: #e0e7ff;
@@ -121,7 +122,7 @@ label::before {
 }
 
 /* When radio is checked, show filled checkmark */
-input[type="radio"]:checked + label::before {
+input[type="radio"]:checked+label::before {
     background: #004080;
     border: 5px solid #e0e7ff;
 }
@@ -233,7 +234,7 @@ label:hover {
         align-items: center;
         padding: 10px 20px;
     }
-    
+
     #links {
         display: none;
         flex-direction: column;
@@ -245,32 +246,54 @@ label:hover {
         text-align: center;
         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     }
-    
+
     #links.active {
         display: flex;
     }
-    
+
     .nav {
         padding: 15px;
         display: block;
         font-size: 20px;
     }
-    
+
     #menu-toggle {
         display: block;
         cursor: pointer;
         font-size: 28px;
     }
+
+    /* Adjust quiz container width for mobile */
+    .quiz-container {
+        width: 95%;
+        padding: 20px;
+    }
+
+    /* Resize radio button labels */
+    label {
+        font-size: 4vw;
+        padding: 10px;
+    }
+
+    /* Ensure buttons scale properly */
+    button {
+        font-size: 4vw;
+        padding: 12px 16px;
+    }
 }
 
 @media screen and (min-width: 769px) {
     #links {
-        display: flex !important;  /* Always visible on desktops */
-        position: relative; /* Prevents mobile styling from affecting it */
-        flex-direction: row; /* Keeps items in a row */
+        display: flex !important;
+        /* Always visible on desktops */
+        position: relative;
+        /* Prevents mobile styling from affecting it */
+        flex-direction: row;
+        /* Keeps items in a row */
     }
 
     #menu-toggle {
-        display: none; /* Hide hamburger menu on desktops */
+        display: none;
+        /* Hide hamburger menu on desktops */
     }
 }

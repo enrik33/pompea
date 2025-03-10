@@ -1,61 +1,64 @@
-// jQuery FAQ Toggle Implementation (Improved)
-$(document).ready(function () {
-    // Ensure all FAQ answers are hidden initially
-    $(".faq-answer").hide();
+document.addEventListener("DOMContentLoaded", function () {
+    // Menu Toggle Logic (Fix)
+    const menuToggle = document.getElementById("menu-toggle");
+    const navLinks = document.getElementById("links");
 
-    $(".faq-question").click(function () {
-        // Close all FAQ answers except the one being clicked
-        $(".faq-answer").not($(this).next()).slideUp();
+    if (menuToggle && navLinks) {
+        menuToggle.addEventListener("click", function () {
+            navLinks.classList.toggle("active");
+            navLinks.classList.toggle("hidden"); // Ensure it hides properly
+        });
+    } else {
+        console.error("Menu toggle or nav links not found on this page.");
+    }
 
-        // Toggle the clicked FAQ answer
-        $(this).next(".faq-answer").slideToggle();
+    // FAQ Toggle Implementation
+    $(document).ready(function () {
+        $(".faq-answer").hide();
+        $(".faq-question").click(function () {
+            $(".faq-answer").not($(this).next()).slideUp();
+            $(this).next(".faq-answer").slideToggle();
+        });
     });
-});
 
-// JavaScript for Countdown Timer
+    // Countdown Timer
+    function startCountdown(durationInMinutes) {
+        let countdownElement = document.getElementById("countdown");
+        let timeRemaining = durationInMinutes * 60;
 
-function startCountdown(durationInMinutes) {
-    let countdownElement = document.getElementById("countdown");
-    let timeRemaining = durationInMinutes * 60;
+        function updateCountdown() {
+            let minutes = Math.floor(timeRemaining / 60);
+            let seconds = timeRemaining % 60;
+            countdownElement.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 
-    function updateCountdown() {
-        let minutes = Math.floor(timeRemaining / 60);
-        let seconds = timeRemaining % 60;
-        countdownElement.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-
-        if (timeRemaining > 0) {
-            timeRemaining--;
-            setTimeout(updateCountdown, 1000);
-        } else {
-            countdownElement.textContent = "Offer Expired";
+            if (timeRemaining > 0) {
+                timeRemaining--;
+                setTimeout(updateCountdown, 1000);
+            } else {
+                countdownElement.textContent = "Offer Expired";
+            }
+        }
+        if (countdownElement) {
+            updateCountdown();
         }
     }
 
-    updateCountdown();
-}
+    startCountdown(60);
 
-// Start countdown for a 60-minute offer window
-startCountdown(60);
+    // Timeline Animation
+    const timelineItems = document.querySelectorAll(".timeline-item");
 
+    if (timelineItems.length > 0) {
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                }
+            });
+        }, { threshold: 0.3 });
 
-const menuToggle = document.getElementById("menu-toggle");
-const navLinks = document.getElementById("links");
-
-menuToggle.addEventListener("click", function () {
-    navLinks.classList.toggle("active");
-    navLinks.classList.toggle("hidden"); // Ensure it hides properly
-});
-
-const timelineItems = document.querySelectorAll(".timeline-item");
-
-const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-        }
-    });
-}, { threshold: 0.3 });
-
-timelineItems.forEach(item => {
-    observer.observe(item);
+        timelineItems.forEach(item => {
+            observer.observe(item);
+        });
+    }
 });

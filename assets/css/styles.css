@@ -32,7 +32,6 @@ nav {
 
 nav #navImg {
     width: 90%;
-    /* padding-left: 30px; */
 }
 
 nav #links {
@@ -604,8 +603,8 @@ a.gmail:hover {
         gap: 30px;
         justify-content: center;
     }
-    
-    .why-us-section{
+
+    .why-us-section {
         max-width: 100%;
     }
 
@@ -614,15 +613,18 @@ a.gmail:hover {
         flex-wrap: wrap;
         justify-content: center;
     }
-    
+
     /* Ensure all tour images have the same size */
     .tours-images {
-        width: 90%; /* Match the original styles */
-        height: 200px; /* Set a fixed height */
-        margin: auto; /* Center the items */
+        width: 90%;
+        /* Match the original styles */
+        height: 200px;
+        /* Set a fixed height */
+        margin: auto;
+        /* Center the items */
         position: relative;
     }
-    
+
     .image {
         width: 100%;
         height: 100%;
@@ -642,34 +644,35 @@ a.gmail:hover {
         padding: 8px 12px;
     }
 
-     /* Ensure reviews section is mobile-friendly */
-     .reviews-container {
+    /* Ensure reviews section is mobile-friendly */
+    .reviews-container {
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 20px;
         padding: 15px;
     }
-    
+
     /* Adjust review card size and spacing */
     .review-card {
-        width: 90%; /* Ensures proper fit on mobile */
+        width: 90%;
+        /* Ensures proper fit on mobile */
         max-width: 350px;
         padding: 15px;
         text-align: center;
         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     }
-    
+
     .review-text {
         font-size: 3.8vw;
     }
-    
+
     .review-image {
         width: 80px;
         height: 80px;
         border-radius: 50%;
     }
-    
+
     .review-stars {
         font-size: 4vw;
     }
@@ -688,13 +691,13 @@ a.gmail:hover {
         text-align: center;
         gap: 10px;
     }
-    
+
     .social {
         display: flex;
         justify-content: center;
         gap: 15px;
     }
-    
+
     .social img {
         width: 40px;
         height: 40px;

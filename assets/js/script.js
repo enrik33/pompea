@@ -1,5 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
 
+    const menuToggle = document.getElementById("menu-toggle");
+    const navLinks = document.getElementById("links");
+
+    menuToggle.addEventListener("click", function () {
+        navLinks.classList.toggle("active");
+        navLinks.classList.toggle("hidden"); // Ensure it hides properly
+    });
+
     if (typeof jQuery == 'undefined') {
         console.error("jQuery is not loaded!");
     } else {
