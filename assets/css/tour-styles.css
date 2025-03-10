@@ -2,7 +2,8 @@
 
 /* Tour Header */
 .tour-header {
-    background-color: #004080; /* Deep blue for uniqueness */
+    background-color: #004080;
+    /* Deep blue for uniqueness */
     color: white;
     text-align: center;
     padding: 40px;
@@ -11,7 +12,7 @@
     transition: background-color 0.3s ease;
 }
 
-header p{
+header p {
     color: rgb(225, 191, 0);
 }
 
@@ -32,7 +33,10 @@ header p{
 }
 
 /* Tour Details */
-.tour-details, .tour-itinerary, .tour-includes, .tour-booking {
+.tour-details,
+.tour-itinerary,
+.tour-includes,
+.tour-booking {
     max-width: 900px;
     margin: 40px auto;
     padding: 20px;
@@ -48,7 +52,8 @@ h2 {
     margin-bottom: 15px;
 }
 
-p, li {
+p,
+li {
     font-size: 18px;
     line-height: 1.6;
     color: #333;
@@ -160,7 +165,8 @@ p, li {
     gap: 15px;
 }
 
-.tour-booking input, .tour-booking button {
+.tour-booking input,
+.tour-booking button {
     padding: 12px;
     font-size: 18px;
     border: 1px solid #ccc;
@@ -269,7 +275,7 @@ p, li {
         align-items: center;
         padding: 10px 20px;
     }
-    
+
     #links {
         display: none;
         flex-direction: column;
@@ -281,32 +287,80 @@ p, li {
         text-align: center;
         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     }
-    
+
     #links.active {
         display: flex;
     }
-    
+
     .nav {
         padding: 15px;
         display: block;
         font-size: 20px;
     }
-    
+
     #menu-toggle {
         display: block;
         cursor: pointer;
         font-size: 28px;
     }
+
+    /* Adjust tour header for mobile */
+    .tour-header {
+        font-size: 5vw;
+        padding: 20px;
+        text-align: center;
+    }
+
+    /* Ensure hero images scale properly */
+    .tour-hero img {
+        width: 100%;
+        max-height: 250px;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+    /* Adjust tour details & itinerary */
+    .tour-details,
+    .tour-itinerary,
+    .tour-includes,
+    .tour-booking {
+        max-width: 95%;
+        margin: 20px auto;
+        padding: 15px;
+    }
+
+    /* Improve timeline item spacing */
+    .timeline-item {
+        font-size: 4vw;
+        padding: 10px;
+    }
+
+    /* Adjust Google Maps for mobile */
+    .tour-map iframe {
+        height: 250px;
+        border-radius: 8px;
+    }
+
+    /* Adjust booking form fields for better mobile layout */
+    .tour-booking input,
+    .tour-booking button {
+        font-size: 4vw;
+        padding: 10px;
+    }
 }
 
 @media screen and (min-width: 769px) {
     #links {
-        display: flex !important;  /* Always visible on desktops */
-        position: relative; /* Prevents mobile styling from affecting it */
-        flex-direction: row; /* Keeps items in a row */
+        display: flex !important;
+        /* Always visible on desktops */
+        position: relative;
+        /* Prevents mobile styling from affecting it */
+        flex-direction: row;
+        /* Keeps items in a row */
     }
 
     #menu-toggle {
-        display: none; /* Hide hamburger menu on desktops */
+        display: none;
+        /* Hide hamburger menu on desktops */
     }
 }
