@@ -16,6 +16,8 @@
         content="Explore Albania with Pompea Tours & Travel. Discover beautiful destinations and unforgettable experiences.">
     <meta property="og:image" content="assets/images/logo_pompea-01.png">
     <meta property="og:url" content="https://www.pompeatours.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -30,6 +32,15 @@
             <a class="nav" href="#home">Homepage</a>
             <a class="nav" href="#tours">Tours</a>
             <a class="nav" href="#contact">Contact</a>
+            <div class="dropdown">
+                <button class="nav dropbtn">More ▾</button>
+                <div class="dropdown-content">
+                    <a href="services/transfers.html">Transfers</a>
+                    <a href="services/flights.html">Flight Assistance</a>
+                    <a href="services/accommodation.html">Accommodation</a>
+                    <a href="services/custom-tour.html">Custom Tour</a>
+                </div>
+            </div>
         </div>
     </nav>
 
@@ -45,12 +56,12 @@
             <div class="mySlides fade">
                 <a href="./tours/Saranda&Gjirokastra_tour.html">
                     <img src="assets/images/ksamil_Albania.jpg" alt="Ksamil Beach" width="1220" height="400">
-                    <div class="text-overlay">Relax on the pristine beaches of Ksamil</div>
+                    <div class="text-overlay"> Experience lunch by the crystal-clear water of Ksamil’s beaches</div>
                 </a>
             </div>
 
             <div class="mySlides fade">
-                <a href="./tours/All_day.html">
+                <a href="./tours/Museum.html">
                     <img src="assets/images/ksamil_Albania.jpg" alt="Lëkurësi Castle" width="1220" height="400">
                     <div class="text-overlay">Panoramic views from Lëkurësi Castle</div>
                 </a>
@@ -67,14 +78,6 @@
                 <a href="./tours/Saranda&Gjirokastra_tour.html">
                     <img src="assets/images/ksamil_Albania.jpg" alt="Gjirokastra Old Town" width="1220" height="400">
                     <div class="text-overlay">Step into history in Gjirokastra</div>
-                </a>
-            </div>
-
-            <div class="mySlides fade">
-                <a href="./tours/Berati_tour.html">
-                    <img src="assets/images/ksamil_Albania.jpg" alt="Berat - City of a Thousand Windows" width="1220"
-                        height="400">
-                    <div class="text-overlay">Experience the charm of Berat</div>
                 </a>
             </div>
 
@@ -112,28 +115,26 @@
             <button onclick="location.href='#tours'" class="cta-button">Explore Our Tours</button>
         </div>
 
-        <section id="why-us" class="why-us-section">
-            <h2>Why Us?</h2>
-            <p>At Pompea Tours & Travel, we believe in curating experiences that go beyond the ordinary. Our private
-                tours are
-                designed to showcase the best of Albania, from its breathtaking landscapes to its rich cultural
-                heritage. Here’s
-                what sets us apart:</p>
+        <section class="why-us-section">
+            <h2>Why Choose Pompea Tours?</h2>
             <ul>
-                <li><strong>Tailored Experiences:</strong> Whether you're seeking adventure, culture, or relaxation, we
-                    customize every tour to match your interests and preferences, ensuring an unforgettable journey.
+                <li>
+                    <strong>Tailored Experiences:</strong> Whether you're a foodie, a history lover, or an outdoor
+                    explorer — we shape the tour to your style.
                 </li>
-                <li><strong>Insider Expertise:</strong> Our knowledgeable guides provide a unique perspective, sharing
-                    hidden
-                    gems and stories that connect you with the soul of each destination.</li>
-                <li><strong>Seamless Travel:</strong> We prioritize your comfort and convenience, offering luxurious
-                    transportation, handpicked accommodations, and meticulous attention to detail.</li>
-                <li><strong>Passion for Exploration:</strong> With a deep love for Albania, we are dedicated to sharing
-                    its
-                    beauty and creating lasting memories for every traveler.</li>
+                <li>
+                    <strong>Insider Expertise:</strong> Our knowledge of Albania comes from local guides and authentic
+                    connections.
+                </li>
+                <li>
+                    <strong>Seamless Travel:</strong> We prioritize smooth, stress-free travel with handpicked
+                    destinations and trusted drivers.
+                </li>
+                <li>
+                    <strong>Passion for Exploration:</strong> We love showing off Albania’s natural beauty, culture,
+                    and hidden gems.
+                </li>
             </ul>
-            <p>Choose Pompea Tours & Travel and let us transform your travels into an extraordinary story worth telling.
-            </p>
         </section>
 
         <div class="options">
@@ -211,10 +212,26 @@
                     </a>
                 </div>
                 <div class="tours-images">
-                    <a href="tours/All_day.html">
+                    <a href="tours/Museum.html">
                         <img class="image" src="assets/images/tirana_Albania.jpg" alt="All-Day Tour">
                         <div class="text-block">
-                            <p>All-Day Package: Butrint, City, Museum & Dinner</p>
+                            <p>Museum Package: Butrinti, Saranda & Traditions</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="tours-images">
+                    <a href="tours/Gjirokastra&Blue_Eye.html">
+                        <img class="image" src="assets/images/albania.jpg" alt="Gjirokastra & Blue Eye Tour">
+                        <div class="text-block">
+                            <p>Gjirokastra & Blue Eye Tour</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="tours-images">
+                    <a href="services/custom-tour.html">
+                        <img class="image" src="assets/images/landscape.jpg" alt="Custom Tour">
+                        <div class="text-block">
+                            <p>Design Your Own Tour</p>
                         </div>
                     </a>
                 </div>
@@ -250,8 +267,29 @@
             </div>
         </section>
 
+        <section class="feedback-section">
+            <h2>We’d Love Your Feedback!</h2>
+            <p>Have you traveled with Pompea Tours? Let us know how we did!</p>
+            <p>Leave a public review on:
+                <a class="feedback-link google" href="#" target="_blank">
+                    <i class="fab fa-google"></i> Google
+                </a>,
+                <a class="feedback-link instagram" href="https://www.instagram.com/riku.cipa/" target="_blank">
+                    <i class="fab fa-instagram"></i> Instagram
+                </a>,
+                or <a class="feedback-link facebook" href="https://www.facebook.com/profile.php?id=100084353491997"
+                    target="_blank">
+                    <i class="fab fa-facebook-f"></i> Facebook
+                </a>.
+            </p>
+            <p>Prefer something private?
+                <a class="feedback-link gmail" href="mailto:ec5745@rit.edu">
+                    <i class="fas fa-envelope"></i> Email us directly
+                </a>.
+            </p>
+        </section>
+
         <section id="contact">
-            <h1 class="contact-header">CONTACT</h1>
             <footer>
                 <div class="links">
                     <p class="copyright">&copy; 2025 All Rights Reserved - Enrik Çipa</p>

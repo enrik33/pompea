@@ -37,12 +37,12 @@ window.onload = function () {
                 "full-day": {
                     nature: "../tours/Permeti_tour.html",
                     history: "../tours/Saranda&Gjirokastra_tour.html",
-                    both: "../tours/All_day.html"
+                    both: "../tours/Museum.html"
                 },
                 "multi-day": {
                     nature: "../tours/Himara_tour.html",
                     history: "../tours/Berati_tour.html",
-                    both: "../tours/All_day.html"
+                    both: "../tours/Museum.html"
                 }
             },
             culture: {
@@ -54,12 +54,12 @@ window.onload = function () {
                 "full-day": {
                     nature: "../tours/Saranda&Gjirokastra_tour.html",
                     history: "../tours/Saranda&Gjirokastra_tour.html",
-                    both: "../tours/All_day.html"
+                    both: "../tours/Museum.html"
                 },
                 "multi-day": {
                     nature: "../tours/Berati_tour.html",
                     history: "../tours/Berati_tour.html",
-                    both: "../tours/All_day.html"
+                    both: "../tours/Museum.html"
                 }
             },
             relaxation: {
@@ -71,12 +71,12 @@ window.onload = function () {
                 "full-day": {
                     nature: "../tours/Himara_tour.html",
                     history: "../tours/Saranda&Gjirokastra_tour.html",
-                    both: "../tours/All_day.html"
+                    both: "../tours/Museum.html"
                 },
                 "multi-day": {
                     nature: "../tours/Himara_tour.html",
                     history: "../tours/Berati_tour.html",
-                    both: "../tours/All_day.html"
+                    both: "../tours/Museum.html"
                 }
             }
         };
