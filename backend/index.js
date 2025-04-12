@@ -18,7 +18,7 @@ app.post('/recommend-tour', async (req, res) => {
     const { experience, duration, preference } = req.body;
 
     const prompt = `
-You're a smart tour recommender for Pompea Tours in Albania.
+You're a smart tour recommender for Pompea Tours in Albania. Based on the user's preferences, recommend ONE of the following tours and give a **concise, clear description (max 2 short sentences)** why it's a great fit:
 
 Here are the tour options:
 
@@ -34,7 +34,7 @@ The user wants:
 - Duration: ${duration}
 - Preference: ${preference}
 
-Recommend the **best matching tour** from the list above. Then explain why you chose it in 2-3 engaging sentences.
+Recommend the **best matching tour** from the list above. 
 `;
 
 
@@ -54,4 +54,4 @@ Recommend the **best matching tour** from the list above. Then explain why you c
 });
 
 const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => console.log(`Pompea AI backend running on port ${PORT}`));
+app.listen(PORT, '0.0.0.0', () => console.log(`Pompea AI backend running on port ${PORT}`));

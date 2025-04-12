@@ -76,37 +76,6 @@
     animation: fadeIn 0.5s ease-in-out;
 }
 
-.improved-modal {
-    max-width: 500px;
-    background-color: #ffffff;
-    border-radius: 18px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
-    animation: fadeIn 0.3s ease-in-out;
-}
-
-.modal-header {
-    background-color: #582E3A;
-    color: white;
-    padding: 16px 24px;
-    text-align: center;
-}
-
-.modal-body {
-    padding: 24px;
-    text-align: left;
-    line-height: 1.6;
-    font-size: 16px;
-    color: #333;
-}
-
-.modal-body p {
-    margin-bottom: 24px;
-    max-width: 450px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 #retake-quiz-btn {
     background-color: #c0392b;
 }
@@ -114,7 +83,6 @@
 #retake-quiz-btn:hover {
     background-color: #e74c3c;
 }
-
 
 @keyframes fadeIn {
     from {
@@ -241,13 +209,19 @@ label:hover {
 
 /* Popup Content */
 .popup-content {
-    background: white;
+    max-height: 80vh;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
     text-align: center;
-    width: 350px;
-    max-width: 90%;
+    width: 95%;
+    max-width: 500px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow: hidden;
 }
 
 .popup-content h2 {
@@ -256,17 +230,45 @@ label:hover {
     color: #004080;
 }
 
+.popup-content h3 {
+    font-size: 22px;
+    color: #004080;
+    margin-bottom: 10px;
+}
+
+.popup-content img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.popup-scroll-area {
+    overflow: visible;
+    /* no scrolling, no scrollbars */
+    max-height: none;
+    /* no height limit */
+    margin-bottom: 15px;
+    text-align: left;
+    padding-right: 5px;
+}
+
 .popup-content p {
     font-size: 18px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     color: #333;
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 
 /* Popup Buttons */
 .popup-buttons {
     display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 15px;
+    /* creates even spacing */
 }
 
 .popup-buttons button {
@@ -348,95 +350,63 @@ label:hover {
     color: white;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 600px) {
     .quiz-container {
-        width: 95%;
         padding: 20px;
-    }
-
-    label {
-        font-size: 16px;
-        padding: 10px;
-    }
-
-    label::before {
-        width: 18px;
-        height: 18px;
-    }
-
-    button {
-        font-size: 16px;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    nav {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px 20px;
-    }
-
-    #links {
-        display: none;
-        flex-direction: column;
-        position: absolute;
-        top: 60px;
-        right: 0;
-        background-color: aliceblue;
         width: 100%;
-        text-align: center;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     }
 
-    #links.active {
-        display: flex;
+    .quiz-container h1 {
+        font-size: 22px;
     }
 
-    .nav {
-        padding: 15px;
-        display: block;
-        font-size: 20px;
+    .question-step p {
+        font-size: 16px;
     }
 
-    #menu-toggle {
-        display: block;
-        cursor: pointer;
-        font-size: 28px;
-    }
-
-    /* Adjust quiz container width for mobile */
-    .quiz-container {
-        width: 95%;
-        padding: 20px;
-    }
-
-    /* Resize radio button labels */
     label {
-        font-size: 4vw;
+        font-size: 16px;
         padding: 10px;
     }
 
-    /* Ensure buttons scale properly */
     button {
-        font-size: 4vw;
-        padding: 12px 16px;
-    }
-}
-
-@media screen and (min-width: 769px) {
-    #links {
-        display: flex !important;
-        /* Always visible on desktops */
-        position: relative;
-        /* Prevents mobile styling from affecting it */
-        flex-direction: row;
-        /* Keeps items in a row */
+        font-size: 16px;
+        padding: 10px 16px;
     }
 
-    #menu-toggle {
-        display: none;
-        /* Hide hamburger menu on desktops */
+    .popup-content {
+        max-width: 90%;
+        padding: 15px;
+        border-radius: 10px;
+    }
+
+    .popup-content h2 {
+        font-size: 18px;
+    }
+
+    .popup-content h3 {
+        font-size: 18px;
+        margin-top: 10px;
+    }
+
+    .popup-content img {
+        height: 140px;
+    }
+
+    .popup-scroll-area {
+        font-size: 15px;
+        max-height: none;
+        overflow: visible;
+        margin-bottom: 10px;
+    }
+
+    .popup-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .popup-buttons button {
+        width: 100%;
+        font-size: 16px;
     }
 }

@@ -12,6 +12,11 @@ window.onload = function () {
     const nextBtns = document.querySelectorAll(".next-question");
     const prevBtns = document.querySelectorAll(".prev-question");
     const submitBtn = document.getElementById("findMyTourButton");
+    const API_BASE_URL =
+        location.hostname === "localhost" || location.hostname === "127.0.0.1"
+            ? "http://localhost:4000"
+            : "https://pompea-backend.onrender.com";
+
 
     function showStep(index) {
         steps.forEach((step, i) => {
@@ -68,7 +73,7 @@ window.onload = function () {
         aiLoading.style.display = "flex";
 
         try {
-            const res = await fetch("http://localhost:4000/recommend-tour", {
+            const res = await fetch(`${API_BASE_URL}/recommend-tour`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ experience, duration, preference })
@@ -82,6 +87,27 @@ window.onload = function () {
                 data.recommendation.toLowerCase().includes(tour.toLowerCase())
             );
             let tourURL = matchedTour ? tourMap[matchedTour] : null;
+
+            // Add header and image dynamically
+            document.getElementById("tour-name-header").textContent = matchedTour || "Your Perfect Tour";
+            const thumbnail = document.getElementById("tour-thumbnail");
+
+            // Assign a corresponding image (update with real images as needed)
+            const tourImages = {
+                "Butrinti & Blue Eye": "../assets/images/albania.jpg",
+                "Saranda & Gjirokastra": "../assets/images/albania.jpg",
+                "Museum Package": "../assets/images/albania.jpg",
+                "Permeti": "../assets/images/albania.jpg",
+                "Himara": "../assets/images/albania.jpg",
+                "Gjirokastra + Blue Eye": "../assets/images/albania.jpg"
+            };
+
+            if (matchedTour && tourImages[matchedTour]) {
+                thumbnail.src = tourImages[matchedTour];
+                thumbnail.style.display = "block";
+            } else {
+                thumbnail.style.display = "none";
+            }
 
             aiText.innerHTML = `<strong>Recommended Tour:</strong><br>${data.recommendation}`;
             viewTourBtn.onclick = () => {
