@@ -279,7 +279,6 @@ a.nav:hover::after {
 .why-us-section strong::after {
     content: " ";
     padding-left: 10px;
-    /* tweak as needed */
 }
 
 /* Discover & Experience Section */
