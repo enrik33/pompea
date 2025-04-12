@@ -34,7 +34,7 @@ The user wants:
 - Duration: ${duration}
 - Preference: ${preference}
 
-Recommend the **best matching tour** from the list above. 
+Recommend the best matching tour from the list above. 
 `;
 
 
