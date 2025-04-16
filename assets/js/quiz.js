@@ -55,7 +55,8 @@ window.onload = function () {
         "Museum Package": "../tours/Museum.html",
         "Permeti": "../tours/Permeti_tour.html",
         "Himara": "../tours/Himara_tour.html",
-        "Gjirokastra + Blue Eye": "../tours/Gjirokastra_Blue_Eye.html"
+        "Gjirokastra + Blue Eye": "../tours/Gjirokastra_Blue_Eye.html",
+        "Butrinti & Saranda Highlights": "../tours/Butrinti_Saranda_Highlights.html"
     };
 
     findMyTourButton.addEventListener("click", async function (e) {
@@ -96,10 +97,11 @@ window.onload = function () {
             const tourImages = {
                 "Butrinti & Blue Eye": "../assets/images/Butrinti.jpg",
                 "Saranda & Gjirokastra": "../assets/images/Saranda.jpg",
-                "Museum Package": "../assets/images/Ksamil.jpg",
-                "Permeti": "../assets/images/Ksamil.jpg",
+                "Museum Package": "../assets/images/Ksamil.avif",
+                "Permeti": "../assets/images/Ksamil.avif",
                 "Himara": "../assets/images/Porto_Palermo.jpg",
-                "Gjirokastra + Blue Eye": "../assets/images/Blue_Eye.jpg"
+                "Gjirokastra + Blue Eye": "../assets/images/Blue_Eye.jpg",
+                "Butrinti & Saranda Highlights": "../assets/images/Saranda.jpg"
             };
 
             if (matchedTour && tourImages[matchedTour]) {

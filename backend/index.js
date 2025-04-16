@@ -28,6 +28,7 @@ Here are the tour options:
 4. Permeti - Best for: Full-day, nature, adventure.
 5. Himara - Best for: Multi-day, nature, relaxation.
 6. Gjirokastra + Blue Eye - Best for: Multi-day, both, adventure.
+7. Butrinti & Saranda Highlights - Best for: Full-day, history + swimming, all-around mix.
 
 The user wants:
 - Experience: ${experience}
