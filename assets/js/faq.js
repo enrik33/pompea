@@ -175,11 +175,6 @@ document.addEventListener("DOMContentLoaded", function () {
             category: "tour"
         },
         {
-            question: "What is the 'Berat: Town of a Thousand Windows' tour?",
-            answer: "A scenic journey to UNESCO-listed Berat, exploring its castle, old town, and enjoying a local lunch.",
-            category: "tour"
-        },
-        {
             question: "What types of meals can I expect during the tours?",
             answer: "Traditional Albanian meals with local ingredients: grilled meats, seafood, vegetables, cheeses, and bread.",
             category: "tour"
