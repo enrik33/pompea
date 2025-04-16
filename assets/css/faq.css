@@ -172,3 +172,60 @@
     width: 16px;
     height: 16px;
 }
+
+@media screen and (max-width: 768px) {
+    .faq-main {
+        padding: 10px;
+    }
+
+    .faq-title {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+    }
+
+    .faq-filters {
+        gap: 8px;
+        padding: 0 10px;
+    }
+
+    .filter-btn {
+        padding: 8px 14px;
+        font-size: 14px;
+        flex: 1 1 auto;
+    }
+
+    .faq-question {
+        font-size: 16px;
+        gap: 10px;
+        padding: 8px 0;
+    }
+
+    .faq-answer {
+        font-size: 15px;
+        padding-left: 20px;
+    }
+
+    .faq-search {
+        font-size: 15px;
+        padding: 10px 12px;
+    }
+
+    .faq-footer-links {
+        padding: 16px 8px;
+    }
+
+    .faq-footer-links p {
+        font-size: 15px;
+    }
+
+    .faq-footer-links a.inline-link {
+        font-size: 14px;
+        padding: 5px 10px;
+        margin: 4px 2px;
+    }
+
+    .faq-footer-links a.inline-link img {
+        width: 14px;
+        height: 14px;
+    }
+}
