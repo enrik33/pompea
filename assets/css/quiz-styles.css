@@ -222,6 +222,7 @@ label:hover {
     flex-direction: column;
     justify-content: flex-start;
     overflow: hidden;
+    min-height: 500px;
 }
 
 .popup-content h2 {
