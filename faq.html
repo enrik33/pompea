@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ | Pompea Tours & Travel</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/faq.css">
+    <link rel="stylesheet" href="assets/js/faq.js">
+    <script src="../assets/js/faq.js" defer></script>
+</head>
+
+<body>
+    <nav aria-label="Main Navigation">
+        <div id="navImg">
+            <a href="#home">
+                <img src="assets/images/logo_pompea-01.png" alt="Pompea Tours & Travel" id="logo">
+            </a>
+        </div>
+        <div id="menu-toggle">☰</div>
+        <div id="links" class="hidden">
+            <a class="nav" href="index.html">Homepage</a>
+            <a class="nav" href="#tours">Tours</a>
+            <a class="nav" href="#contact">Contact</a>
+            <div class="dropdown">
+                <button class="nav dropbtn">More ▾</button>
+                <div class="dropdown-content">
+                    <a href="services/transfers.html">Transfers</a>
+                    <a href="services/flights.html">Flight Assistance</a>
+                    <a href="services/accommodation.html">Accommodation</a>
+                    <a href="services/custom-tour.html">Custom Tour</a>
+                    <a href="faq.html">FAQ</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="faq-main">
+        <h1 class="faq-title">Frequently Asked Questions</h1>
+
+        <!-- Filter Buttons -->
+        <div class="faq-filters">
+            <button class="filter-btn active" data-category="all">All</button>
+            <button class="filter-btn" data-category="booking">Booking</button>
+            <button class="filter-btn" data-category="payment">Payment</button>
+            <button class="filter-btn" data-category="tour">Tour Details</button>
+            <button class="filter-btn" data-category="transport">Transport</button>
+            <button class="filter-btn" data-category="planning">Planning</button>
+            <button class="filter-btn" data-category="feedback">Feedback</button>
+        </div>
+
+        <!-- FAQ Container -->
+        <section id="faq-container">
+            <!-- FAQ items will be dynamically inserted via JS or hardcoded if preferred -->
+        </section>
+
+        <div class="faq-footer-links">
+            <p>
+                Still have questions?<br>
+                Contact us at
+                <a href="mailto:ec5745@rit.edu" class="inline-link">
+                    <img src="assets/images/gmail.svg" alt="Email Icon"> ec5745@rit.edu
+                </a>
+                or
+                <a href="index.html#tours" class="inline-link">
+                    <img src="assets/images/logua.jpg" alt="Tour Icon"> book your tour here
+                </a>.
+            </p>
+        </div>
+
+    </main>
+
+    <section id="contact">
+        <footer>
+            <div class="links">
+                <p class="copyright">&copy; 2025 All Rights Reserved - Enrik Çipa</p>
+                <div class="social">
+                    <a class="insta" href="https://www.instagram.com/riku.cipa/"><img
+                            src="../assets/images/instagram.svg" alt="instagram" width="50" height="50" /></a>
+                    <a class="facebook" href="https://www.facebook.com/profile.php?id=100084353491997"><img
+                            src="../assets/images/facebook.svg" alt="facebook" width="50" height="50" /></a>
+                    <a class="gmail" href="mailto:ec5745@rit.edu"><img src="../assets/images/gmail.svg" alt="gmail"
+                            width="50" height="50" /></a>
+                </div>
+            </div>
+        </footer>
+    </section>
+</body>
+
+</html>
