@@ -309,13 +309,4 @@ document.addEventListener("DOMContentLoaded", function () {
             faq.style.display = text.includes(term) ? "block" : "none";
         });
     });
-
-    //     // 👋 Still have questions footer
-    //     const moreHelp = document.createElement("div");
-    //     moreHelp.className = "faq-footer";
-    //     moreHelp.innerHTML = `
-    //     <h3>Still have questions?</h3>
-    //     <p>Contact us at <a href="mailto:ec5745@rit.edu">ec5745@rit.edu</a> or <a href="../index.html#tours">book your tour here</a>.</p>
-    //   `;
-    //     faqContainer.parentNode.appendChild(moreHelp);
 });
