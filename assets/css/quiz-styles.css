@@ -34,6 +34,19 @@
     animation: fadeIn 0.4s ease-in-out;
 }
 
+/* Target the question text */
+.question-step p {
+    font-size: 1.1rem;
+    /* Slightly larger */
+    font-weight: 600;
+    /* Semi-bold */
+    text-align: center;
+    color: #003366;
+    /* Deep blue tone */
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
 .question-step.active-step {
     display: block;
 }
@@ -119,7 +132,7 @@
 }
 
 /* Button */
-button {
+#quiz button {
     background-color: #00509e;
     color: white;
     border: none;
@@ -132,7 +145,7 @@ button {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-button:hover {
+#quiz button:hover {
     background-color: #0077cc;
     transform: scale(1.05);
 }
@@ -361,16 +374,19 @@ label:hover {
         font-size: 22px;
     }
 
-    .question-step p {
-        font-size: 16px;
+    .question-step p,
+    .question-number {
+        font-size: 1rem;
+        padding: 8px;
+        margin-bottom: 16px;
     }
 
     label {
-        font-size: 16px;
-        padding: 10px;
+        font-size: 15px;
+        padding: 6px 10px;
     }
 
-    button {
+    #quiz button {
         font-size: 16px;
         padding: 10px 16px;
     }
