@@ -614,6 +614,22 @@ a.gmail:hover {
     display: none;
 }
 
+.footer-links {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 14px;
+}
+
+.footer-links a {
+    color: #003366;
+    text-decoration: underline;
+    margin: 0 5px;
+}
+
+.footer-links a:hover {
+    color: #0077cc;
+}
+
 @media screen and (max-width: 768px) {
     nav {
         display: flex;

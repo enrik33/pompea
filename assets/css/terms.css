@@ -1,0 +1,59 @@
+/* Terms Page Styling */
+.terms-main {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    color: #333;
+    line-height: 1.7;
+    font-size: 16px;
+}
+
+.terms-main h1 {
+    font-size: 2.5rem;
+    color: #003366;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.terms-section h2 {
+    font-size: 1.4rem;
+    color: #003366;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.terms-section p,
+.terms-section ul {
+    margin-bottom: 20px;
+}
+
+.terms-section ul {
+    padding-left: 20px;
+    list-style-type: disc;
+}
+
+.terms-section a {
+    color: #00509e;
+    font-weight: 500;
+    text-decoration: underline;
+}
+
+.terms-section a:hover {
+    color: #0077cc;
+    text-decoration: none;
+}
+
+@media screen and (max-width: 768px) {
+    .terms-main {
+        padding: 10px;
+        font-size: 15px;
+    }
+
+    .terms-main h1 {
+        font-size: 2rem;
+    }
+
+    .terms-section h2 {
+        font-size: 1.2rem;
+    }
+}
