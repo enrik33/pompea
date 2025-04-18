@@ -159,6 +159,22 @@ li {
 }
 
 /* Booking Form */
+
+.book-button {
+    display: inline-block;
+    background-color: #00509e;
+    color: white;
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+.book-button:hover {
+    background-color: #003f7d;
+}
+
 .tour-booking form {
     display: flex;
     flex-direction: column;

@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const pool = require('./db');
 
 dotenv.config();
 
@@ -51,6 +52,80 @@ Recommend the best matching tour from the list above.
     } catch (error) {
         console.error('OpenAI API error:', error);
         res.status(500).json({ error: 'Something went wrong' });
+    }
+});
+
+// Booking endpoint
+app.post("/book", async (req, res) => {
+    const {
+        tourName,
+        date,
+        groupSize,
+        name,
+        email,
+        phone,
+        paymentMethod,
+        specialRequests,
+    } = req.body;
+
+    const connection = await pool.getConnection();
+
+    try {
+        await connection.beginTransaction();
+
+        // Insert or find user
+        const [existingUser] = await connection.query(
+            "SELECT id FROM users WHERE email = ? AND phone = ?",
+            [email, phone]
+        );
+
+        let userId;
+
+        if (existingUser.length > 0) {
+            userId = existingUser[0].id;
+        } else {
+            const [userInsert] = await connection.query(
+                "INSERT INTO users (name, email, phone) VALUES (?, ?, ?)",
+                [name, email, phone]
+            );
+            userId = userInsert.insertId;
+        }
+
+        // Find tour ID
+        const [tourResult] = await connection.query(
+            "SELECT id FROM tours WHERE title = ?",
+            [tourName.trim()]
+        );
+
+        if (tourResult.length === 0) {
+            throw new Error("Invalid tour name");
+        }
+
+        const tourId = tourResult[0].id;
+
+        // Insert booking
+        await connection.query(
+            `INSERT INTO bookings (user_id, tour_id, booking_date, num_people, total_price, payment_method, special_requests)
+         VALUES (?, ?, ?, ?, ?, ?, ?)`,
+            [
+                userId,
+                tourId,
+                date,
+                groupSize,
+                0, // placeholder, can calculate later
+                paymentMethod,
+                specialRequests || null
+            ]
+        );
+
+        await connection.commit();
+        res.json({ message: "✅ Reservation received! You’ll get a confirmation email soon." });
+    } catch (error) {
+        await connection.rollback();
+        console.error("Booking error:", error);
+        res.status(500).json({ error: "❌ Could not complete reservation." });
+    } finally {
+        connection.release();
     }
 });
 
