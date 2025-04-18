@@ -47,7 +47,7 @@
 
             <div class="form-group">
                 <label for="date">Select Date:</label>
-                <input type="date" id="date" name="date" required>
+                <input type="date" id="date" name="date" required min="<?= date('Y-m-d') ?>">
             </div>
 
             <div class="form-group">
@@ -57,7 +57,8 @@
 
             <div class="form-group">
                 <label for="name">Your Name:</label>
-                <input type="text" id="name" name="name" required>
+                <input type="text" id="name" name="name" required pattern="[A-Za-z\s]{2,50}"
+                    title="Enter 2–50 letters only">
             </div>
 
             <div class="form-group">
@@ -67,7 +68,8 @@
 
             <div class="form-group">
                 <label for="phone">Phone Number:</label>
-                <input type="tel" id="phone" name="phone" required>
+                <input type="tel" id="phone" name="phone" required pattern="^\+?\d{8,15}$"
+                    title="Enter a valid phone number">
             </div>
 
             <div class="form-group">
