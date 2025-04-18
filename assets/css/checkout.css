@@ -1,0 +1,99 @@
+/* Checkout Form Styles */
+.checkout-main {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #f9fcff;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.checkout-main h1 {
+    text-align: center;
+    color: #003366;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #003366;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 16px;
+    border: 2px solid #cbd5e1;
+    border-radius: 8px;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    transition: border-color 0.3s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #00509e;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 14px;
+    font-size: 17px;
+    background-color: #00509e;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #003f7d;
+}
+
+#confirmation-message {
+    margin-top: 30px;
+    font-size: 16px;
+    text-align: center;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #e6f7f1;
+    color: #006442;
+}
+
+.hidden {
+    display: none;
+}
+
+@media screen and (max-width: 600px) {
+    .checkout-main {
+        margin: 20px 10px;
+        padding: 15px;
+    }
+
+    .checkout-main h1 {
+        font-size: 22px;
+    }
+
+    input,
+    select,
+    textarea {
+        font-size: 15px;
+        padding: 10px;
+    }
+
+    .submit-btn {
+        font-size: 16px;
+        padding: 12px;
+    }
+}
