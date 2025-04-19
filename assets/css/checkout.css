@@ -96,6 +96,22 @@ label.error-label {
     font-weight: 600;
 }
 
+#price-preview {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #00509e;
+    text-align: center;
+    background-color: #e6f2ff;
+    padding: 10px 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 @media screen and (max-width: 600px) {
     .checkout-main {
         margin: 20px 10px;

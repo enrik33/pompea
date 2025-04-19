@@ -57,7 +57,6 @@ Recommend the best matching tour from the list above.
 
 // Booking endpoint
 app.post("/book", async (req, res) => {
-
     const {
         tourName,
         date,
@@ -66,6 +65,7 @@ app.post("/book", async (req, res) => {
         email,
         phone,
         paymentMethod,
+        language,
         specialRequests,
     } = req.body;
 
@@ -102,9 +102,9 @@ app.post("/book", async (req, res) => {
             userId = userInsert.insertId;
         }
 
-        // Find tour ID
+        // Find tour details
         const [tourResult] = await connection.query(
-            "SELECT id FROM tours WHERE title = ?",
+            "SELECT * FROM tours WHERE title = ?",
             [tourName.trim()]
         );
 
@@ -112,21 +112,95 @@ app.post("/book", async (req, res) => {
             throw new Error("Invalid tour name");
         }
 
-        const tourId = tourResult[0].id;
+        const tour = tourResult[0];
+        const tourId = tour.id;
+
+        // Calculate pricing
+        const languageFee = language !== "english" ? 70 : 0;
+
+        const baseCost =
+            tour.fixed_driver_cost +
+            (tour.entry_fee_per_person * groupSize) +
+            (tour.lunch_cost_per_person * groupSize) +
+            languageFee;
+
+        const markup = (baseCost * (tour.markup_percentage || 0)) / 100;
+        const preVAT = baseCost + markup + (tour.fixed_tax_buffer || 0);
+        const totalVAT = (preVAT * (tour.vat_percentage || 0)) / 100;
+
+        const totalPrice = Math.round(preVAT + totalVAT);
 
         // Insert booking
         await connection.query(
             `INSERT INTO bookings (user_id, tour_id, booking_date, num_people, total_price, payment_method, special_requests, language)
              VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-            [userId, tourId, date, groupSize, 0, paymentMethod, specialRequests || null, language]
+            [
+                userId,
+                tourId,
+                date,
+                groupSize,
+                totalPrice,
+                paymentMethod,
+                specialRequests || null,
+                language
+            ]
         );
 
         await connection.commit();
-        res.json({ message: "Reservation received! You’ll get a confirmation email soon." });
+        res.json({ message: `✅ Reservation received! Total: €${totalPrice}` });
     } catch (error) {
         await connection.rollback();
         console.error("Booking error:", error);
-        res.status(500).json({ error: "Could not complete reservation." });
+        res.status(500).json({ error: "❌ Could not complete reservation." });
+    } finally {
+        connection.release();
+    }
+});
+
+app.post("/estimate", async (req, res) => {
+    const { tourName, groupSize, language } = req.body;
+
+    if (!tourName || !groupSize || isNaN(groupSize) || groupSize < 2 || groupSize > 6) {
+        return res.status(400).json({ error: "Invalid input." });
+    }
+
+    const connection = await pool.getConnection();
+
+    try {
+        const [tourResult] = await connection.query(
+            "SELECT * FROM tours WHERE title = ?",
+            [tourName.trim()]
+        );
+
+        if (tourResult.length === 0) {
+            return res.status(404).json({ error: "Tour not found." });
+        }
+
+        const tour = tourResult[0];
+
+        const driverCost = parseFloat(tour.fixed_driver_cost || 0);
+        const entryFee = parseFloat(tour.entry_fee_per_person || 0);
+        const lunchCost = parseFloat(tour.lunch_cost_per_person || 0);
+        const markupPercent = parseFloat(tour.markup_percentage || 0);
+        const vatPercent = parseFloat(tour.vat_percentage || 0);
+        const taxBuffer = parseFloat(tour.fixed_tax_buffer || 0);
+        const languageFee = language !== "english" ? 70 : 0;
+
+        const baseCost = driverCost + (entryFee * groupSize) + (lunchCost * groupSize) + languageFee;
+        const markup = (baseCost * markupPercent) / 100;
+        const preVAT = baseCost + markup + taxBuffer;
+        const totalVAT = (preVAT * vatPercent) / 100;
+
+        const totalPrice = Math.round(preVAT + totalVAT);
+
+
+        console.log({ baseCost, markup, preVAT, totalVAT, totalPrice });
+        console.log(typeof tour.fixed_driver_cost); // string?
+
+        res.json({ estimatedPrice: totalPrice });
+    } catch (err) {
+        console.error("Estimate error:", err);
+        res.status(500).json({ error: "Server error calculating price." });
     } finally {
         connection.release();
     }
