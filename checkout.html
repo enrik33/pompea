@@ -63,7 +63,7 @@
 
             <div class="form-group">
                 <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
+                <input type="email" id="email" name="email" required pattern="^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$">
             </div>
 
             <div class="form-group">
@@ -83,6 +83,18 @@
             </div>
 
             <div class="form-group">
+                <label for="language">Preferred Tour Guide Language:</label>
+                <select id="language" name="language" required>
+                    <option value="english">English (included)</option>
+                    <option value="french">French (+€70)</option>
+                    <option value="italian">Italian (+€70)</option>
+                    <option value="greek">Greek (+€70)</option>
+                    <option value="german">German (+€70)</option>
+                    <option value="spanish">Spanish (+€70)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
                 <label for="specialRequests">Special Interests or Needs (optional):</label>
                 <textarea id="specialRequests" name="specialRequests" rows="4"></textarea>
             </div>
@@ -90,7 +102,7 @@
             <button type="submit" class="submit-btn">Confirm Reservation</button>
         </form>
 
-        <div id="confirmation-message" class="hidden"></div>
+        <div id="confirmation-message" class="hidden" aria-live="polite"></div>
     </main>
 
     <footer>

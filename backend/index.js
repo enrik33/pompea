@@ -57,6 +57,7 @@ Recommend the best matching tour from the list above.
 
 // Booking endpoint
 app.post("/book", async (req, res) => {
+
     const {
         tourName,
         date,
@@ -67,6 +68,16 @@ app.post("/book", async (req, res) => {
         paymentMethod,
         specialRequests,
     } = req.body;
+
+    if (
+        !["paypal", "bank_transfer", "cash"].includes(paymentMethod) ||
+        isNaN(groupSize) || groupSize < 2 || groupSize > 6 ||
+        !/^[A-Za-z\s]{2,50}$/.test(name) ||
+        !/^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test(email) ||
+        !/^\+?\d{8,15}$/.test(phone)
+    ) {
+        return res.status(400).json({ error: "Invalid input data." });
+    }
 
     const connection = await pool.getConnection();
 
@@ -105,25 +116,17 @@ app.post("/book", async (req, res) => {
 
         // Insert booking
         await connection.query(
-            `INSERT INTO bookings (user_id, tour_id, booking_date, num_people, total_price, payment_method, special_requests)
-         VALUES (?, ?, ?, ?, ?, ?, ?)`,
-            [
-                userId,
-                tourId,
-                date,
-                groupSize,
-                0, // placeholder, can calculate later
-                paymentMethod,
-                specialRequests || null
-            ]
+            `INSERT INTO bookings (user_id, tour_id, booking_date, num_people, total_price, payment_method, special_requests, language)
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+            [userId, tourId, date, groupSize, 0, paymentMethod, specialRequests || null, language]
         );
 
         await connection.commit();
-        res.json({ message: "✅ Reservation received! You’ll get a confirmation email soon." });
+        res.json({ message: "Reservation received! You’ll get a confirmation email soon." });
     } catch (error) {
         await connection.rollback();
         console.error("Booking error:", error);
-        res.status(500).json({ error: "❌ Could not complete reservation." });
+        res.status(500).json({ error: "Could not complete reservation." });
     } finally {
         connection.release();
     }

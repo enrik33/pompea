@@ -75,6 +75,27 @@ textarea:focus {
     display: none;
 }
 
+/* Add red border and subtle background when there's an error */
+input.error,
+select.error,
+textarea.error {
+    border: 2px solid #cc0000;
+    background-color: #fff6f6;
+    color: #cc0000;
+}
+
+/* Optional: Red placeholder text */
+input.error::placeholder,
+textarea.error::placeholder {
+    color: #cc0000;
+}
+
+/* Optional: Error label styling */
+label.error-label {
+    color: #cc0000;
+    font-weight: 600;
+}
+
 @media screen and (max-width: 600px) {
     .checkout-main {
         margin: 20px 10px;
