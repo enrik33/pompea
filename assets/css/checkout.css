@@ -112,6 +112,33 @@ label.error-label {
     margin-right: auto;
 }
 
+.price-preview {
+    margin-top: 20px;
+    padding: 12px 20px;
+    background-color: #f0f8ff;
+    border: 2px solid #00509e;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #003b7a;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: scale(0.95);
+}
+
+.price-preview.show {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.price-preview span {
+    display: block;
+    font-size: 0.9rem;
+    color: #444;
+    margin-top: 4px;
+}
+
 @media screen and (max-width: 600px) {
     .checkout-main {
         margin: 20px 10px;

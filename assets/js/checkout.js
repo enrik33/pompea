@@ -36,9 +36,13 @@ document.addEventListener("DOMContentLoaded", () => {
             });
             const result = await res.json();
             if (res.ok && result.estimatedPrice) {
-                pricePreview.textContent = `Estimated Total: €${result.estimatedPrice}`;
+                const perPerson = Math.round(result.estimatedPrice / groupSize);
+                pricePreview.innerHTML = `Estimated Total: €${result.estimatedPrice}<span>€${perPerson} per person</span>`;
+                pricePreview.classList.add("show");
+                pricePreview.classList.remove("hidden");
             } else {
                 pricePreview.textContent = "";
+                pricePreview.classList.remove("show");
             }
         } catch (err) {
             console.error("Error fetching estimate:", err);
