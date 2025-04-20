@@ -4,6 +4,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const submitBtn = form.querySelector("button[type='submit']");
     const pricePreview = document.getElementById("price-preview");
 
+    const paypalContainer = document.getElementById("paypal-button-container");
+    const cashBtn = document.getElementById("cash-button");
+    const bankInfo = document.getElementById("bank-instructions");
+
+
     const today = new Date().toISOString().split("T")[0];
     const maxDate = new Date();
     maxDate.setFullYear(maxDate.getFullYear() + 1);
@@ -17,6 +22,29 @@ document.addEventListener("DOMContentLoaded", () => {
     const tourName = urlParams.get("tour");
     if (tourName) {
         document.getElementById("tourName").value = decodeURIComponent(tourName);
+    }
+
+    function updatePaymentVisibility() {
+        const payment = document.getElementById("paymentMethod").value;
+
+        paypalContainer.classList.add("hidden");
+        cashBtn.classList.add("hidden");
+        bankInfo.classList.add("hidden");
+
+        if (payment === "paypal") {
+            paypalContainer.classList.remove("hidden");
+        } else if (payment === "cash") {
+            cashBtn.classList.remove("hidden");
+        } else if (payment === "bank_transfer") {
+            bankInfo.innerHTML = `
+                <div class="bank-message">
+                    Please transfer your total amount to:<br>
+                    <strong>IBAN:</strong> AL01234567890123456789012345<br>
+                    <strong>SWIFT:</strong> ALBXXXX<br>
+                    Include your full name as the payment reference.
+                </div>`;
+            bankInfo.classList.remove("hidden");
+        }
     }
 
     async function fetchTourPriceEstimate() {
@@ -53,6 +81,78 @@ document.addEventListener("DOMContentLoaded", () => {
     form.querySelector("#groupSize").addEventListener("input", fetchTourPriceEstimate);
     form.querySelector("#language").addEventListener("change", fetchTourPriceEstimate);
 
+    function getFormData() {
+        return {
+            tourName: decodeURIComponent(tourName),
+            date: form.querySelector("#date").value,
+            groupSize: parseInt(form.querySelector("#groupSize").value),
+            name: form.querySelector("#name").value.trim(),
+            email: form.querySelector("#email").value.trim(),
+            phone: form.querySelector("#phone").value.trim(),
+            paymentMethod: "paypal", // always "paypal" for this case
+            language: form.querySelector("#language").value,
+            specialRequests: form.querySelector("#specialRequests").value.trim()
+        };
+    }
+
+    // PayPal button always renders
+    if (typeof paypal !== "undefined") {
+        paypal.Buttons({
+            createOrder: async () => {
+                const groupSize = parseInt(document.querySelector("#groupSize").value);
+                const language = document.querySelector("#language").value;
+                const res = await fetch("http://localhost:4000/create-order", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        tourName: decodeURIComponent(tourName),
+                        groupSize,
+                        language
+                    })
+                });
+
+                const dataRes = await res.json();
+                return dataRes.id;
+            },
+            onApprove: async (data, actions) => {
+                try {
+                    const details = await actions.order.capture();
+                    alert("✅ Payment completed by " + details.payer.name.given_name);
+
+                    const bookingData = getFormData();
+
+                    const res = await fetch("http://localhost:4000/book", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(bookingData)
+                    });
+
+                    const result = await res.json();
+
+                    if (res.ok) {
+                        form.reset();
+                        form.classList.add("hidden");
+                        confirmation.classList.remove("hidden");
+                        confirmation.textContent = result.message;
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                    } else {
+                        alert(result.error || "Payment was successful, but booking failed.");
+                    }
+
+                } catch (err) {
+                    console.error("Booking error after PayPal:", err);
+                    alert("Something went wrong after payment. Please contact support.");
+                }
+            },
+            onError: (err) => {
+                console.error("PayPal Error:", err);
+                alert("PayPal transaction failed.");
+            }
+        }).render("#paypal-button-container");
+    }
+
+    document.getElementById("paymentMethod").addEventListener("change", updatePaymentVisibility);
+
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
 
@@ -77,6 +177,12 @@ document.addEventListener("DOMContentLoaded", () => {
         if (groupSize < 2 || groupSize > 6) return alert("Group size must be between 2 and 6.");
         if (!validPayments.includes(paymentMethod)) return alert("Please select a valid payment method.");
         if (specialRequests.length > 500) return alert("Special requests must be under 500 characters.");
+
+        // ⛔ Skip submitting if PayPal is selected — use the PayPal button instead
+        if (paymentMethod === "paypal") {
+            alert("Please complete your payment using the PayPal button below.");
+            return;
+        }
 
         const data = {
             tourName: decodeURIComponent(tourName),

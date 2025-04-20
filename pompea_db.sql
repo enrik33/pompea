@@ -46,7 +46,15 @@ CREATE TABLE bookings (
     total_price DECIMAL(10, 2),
     payment_method ENUM('paypal', 'bank_transfer', 'cash') NOT NULL,
     payment_status ENUM('pending', 'paid', 'cancelled') DEFAULT 'pending',
+    special_requests TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (tour_id) REFERENCES tours(id)
 );
+
+ALTER TABLE bookings ADD COLUMN language VARCHAR(20) DEFAULT 'english';
+
+SELECT * FROM bookings;
+
+SELECT * FROM tours;
+

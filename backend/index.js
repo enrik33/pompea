@@ -206,5 +206,58 @@ app.post("/estimate", async (req, res) => {
     }
 });
 
+const { client, OrdersCreateRequest } = require('./paypal');
+
+app.post("/create-order", async (req, res) => {
+    const { tourName, groupSize, language } = req.body;
+
+    const connection = await pool.getConnection();
+    try {
+        const [tourResult] = await connection.query("SELECT * FROM tours WHERE title = ?", [tourName.trim()]);
+        if (tourResult.length === 0) return res.status(400).json({ error: "Tour not found" });
+
+        const tour = tourResult[0];
+
+        // Ensure everything is parsed properly
+        const driverCost = parseFloat(tour.fixed_driver_cost || 0);
+        const entryFee = parseFloat(tour.entry_fee_per_person || 0);
+        const lunchCost = parseFloat(tour.lunch_cost_per_person || 0);
+        const markupPercent = parseFloat(tour.markup_percentage || 0);
+        const vatPercent = parseFloat(tour.vat_percentage || 0);
+        const taxBuffer = parseFloat(tour.fixed_tax_buffer || 0);
+        const languageFee = language !== "english" ? 70 : 0;
+
+        const baseCost = driverCost + (entryFee * groupSize) + (lunchCost * groupSize) + languageFee;
+        const markup = (baseCost * markupPercent) / 100;
+        const preVAT = baseCost + markup + taxBuffer;
+        const totalVAT = (preVAT * vatPercent) / 100;
+
+        const totalPrice = Math.round(preVAT + totalVAT);
+
+        // Log to confirm everything is numeric
+        console.log({ baseCost, markup, preVAT, totalVAT, totalPrice });
+
+        const request = new OrdersCreateRequest();
+        request.prefer("return=representation");
+        request.requestBody({
+            intent: "CAPTURE",
+            purchase_units: [{
+                amount: {
+                    currency_code: "EUR",
+                    value: totalPrice.toString() // PayPal needs string here
+                }
+            }]
+        });
+
+        const order = await client().execute(request);
+        res.json({ id: order.result.id });
+    } catch (err) {
+        console.error("PayPal Order Error:", err);
+        res.status(500).json({ error: "Payment setup failed." });
+    } finally {
+        connection.release();
+    }
+});
+
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, '0.0.0.0', () => console.log(`Pompea AI backend running on port ${PORT}`));
