@@ -15,6 +15,8 @@ app.use(cors(corsOptions));
 
 app.use(express.json());
 
+app.options('*', cors(corsOptions));
+
 const OpenAI = require("openai");
 
 const openai = new OpenAI({
