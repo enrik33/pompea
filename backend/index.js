@@ -6,7 +6,13 @@ const pool = require('./db');
 dotenv.config();
 
 const app = express();
-app.use(cors());
+const corsOptions = {
+    origin: ['https://enrik33.github.io', 'http://localhost:4000'],
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type'],
+};
+app.use(cors(corsOptions));
+
 app.use(express.json());
 
 const OpenAI = require("openai");
