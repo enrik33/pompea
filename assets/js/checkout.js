@@ -7,7 +7,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const paypalContainer = document.getElementById("paypal-button-container");
     const cashBtn = document.getElementById("cash-button");
     const bankInfo = document.getElementById("bank-instructions");
-
+    const API_BASE_URL =
+        location.hostname === "localhost" || location.hostname === "127.0.0.1"
+            ? "http://localhost:4000"
+            : "https://pompea-backend.onrender.com";
 
     const today = new Date().toISOString().split("T")[0];
     const maxDate = new Date();
@@ -53,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!tourName || isNaN(groupSize) || groupSize < 2 || groupSize > 6) return;
 
         try {
-            const res = await fetch("http://localhost:4000/estimate", {
+            const res = await fetch(`${API_BASE_URL}/estimate`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
@@ -101,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
             createOrder: async () => {
                 const groupSize = parseInt(document.querySelector("#groupSize").value);
                 const language = document.querySelector("#language").value;
-                const res = await fetch("http://localhost:4000/create-order", {
+                const res = await fetch(`${API_BASE_URL}/create-order`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
@@ -121,7 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     const bookingData = getFormData();
 
-                    const res = await fetch("http://localhost:4000/book", {
+                    const res = await fetch(`${API_BASE_URL}/book`, {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify(bookingData)
@@ -200,7 +203,7 @@ document.addEventListener("DOMContentLoaded", () => {
         submitBtn.textContent = "Submitting...";
 
         try {
-            const res = await fetch("http://localhost:4000/book", {
+            const res = await fetch(`${API_BASE_URL}/book`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(data)
