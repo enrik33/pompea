@@ -124,17 +124,18 @@ app.post("/book", async (req, res) => {
         const tourId = tour.id;
 
         // Calculate pricing
+        const driverCost = parseFloat(tour.fixed_driver_cost || 0);
+        const entryFee = parseFloat(tour.entry_fee_per_person || 0);
+        const lunchCost = parseFloat(tour.lunch_cost_per_person || 0);
+        const markupPercent = parseFloat(tour.markup_percentage || 0);
+        const vatPercent = parseFloat(tour.vat_percentage || 0);
+        const taxBuffer = parseFloat(tour.fixed_tax_buffer || 0);
         const languageFee = language !== "english" ? 70 : 0;
 
-        const baseCost =
-            tour.fixed_driver_cost +
-            (tour.entry_fee_per_person * groupSize) +
-            (tour.lunch_cost_per_person * groupSize) +
-            languageFee;
-
-        const markup = (baseCost * (tour.markup_percentage || 0)) / 100;
-        const preVAT = baseCost + markup + (tour.fixed_tax_buffer || 0);
-        const totalVAT = (preVAT * (tour.vat_percentage || 0)) / 100;
+        const baseCost = driverCost + (entryFee * groupSize) + (lunchCost * groupSize) + languageFee;
+        const markup = (baseCost * markupPercent) / 100;
+        const preVAT = baseCost + markup + taxBuffer;
+        const totalVAT = (preVAT * vatPercent) / 100;
 
         const totalPrice = Math.round(preVAT + totalVAT);
 
