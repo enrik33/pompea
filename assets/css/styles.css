@@ -7,6 +7,10 @@
     max-width: 100%;
 }
 
+section[id] {
+    scroll-margin-top: 100px;
+}
+
 html {
     scroll-behavior: smooth;
     width: 100%;
@@ -30,7 +34,14 @@ nav {
 }
 
 nav #navImg {
-    width: 90%;
+    width: 40%;
+}
+
+#navImg {
+    display: flex;
+    align-items: center;
+    padding-left: 90px;
+    height: 100%;
 }
 
 nav #links {
@@ -607,6 +618,7 @@ a.gmail:hover {
 #logo {
     height: 60px;
     width: auto;
+    object-fit: contain;
 }
 
 /* Hide menu by default on small screens */

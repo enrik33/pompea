@@ -160,7 +160,7 @@ app.post("/book", async (req, res) => {
     } catch (error) {
         await connection.rollback();
         console.error("Booking error:", error);
-        res.status(500).json({ error: "❌ Could not complete reservation." });
+        res.status(500).json({ error: "Could not complete reservation." });
     } finally {
         connection.release();
     }

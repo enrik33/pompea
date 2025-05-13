@@ -46,6 +46,13 @@ header p {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+.tour-booking {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
 h2 {
     color: #004080;
     font-size: 28px;
@@ -168,11 +175,31 @@ li {
     font-size: 16px;
     border-radius: 8px;
     text-decoration: none;
-    transition: background 0.3s ease;
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .book-button:hover {
     background-color: #003f7d;
+    transform: scale(1.05);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.book-button:active {
+    transform: scale(0.98);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+.book-button::after {
+    content: " →";
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+    transform: translateX(-5px);
+}
+
+.book-button:hover::after {
+    opacity: 1;
+    transform: translateX(0);
 }
 
 .tour-booking form {
