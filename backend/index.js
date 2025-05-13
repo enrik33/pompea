@@ -169,7 +169,10 @@ app.post("/book", async (req, res) => {
 app.post("/estimate", async (req, res) => {
     const { tourName, groupSize, language } = req.body;
 
+    console.log("🧾 [ESTIMATE] Input:", { tourName, groupSize, language });
+
     if (!tourName || !groupSize || isNaN(groupSize) || groupSize < 2 || groupSize > 6) {
+        console.warn("⚠️ Invalid estimate input.");
         return res.status(400).json({ error: "Invalid input." });
     }
 
@@ -182,6 +185,7 @@ app.post("/estimate", async (req, res) => {
         );
 
         if (tourResult.length === 0) {
+            console.warn("⚠️ Tour not found for estimate:", tourName);
             return res.status(404).json({ error: "Tour not found." });
         }
 
@@ -202,13 +206,16 @@ app.post("/estimate", async (req, res) => {
 
         const totalPrice = Math.round(preVAT + totalVAT);
 
-
-        console.log({ baseCost, markup, preVAT, totalVAT, totalPrice });
-        console.log(typeof tour.fixed_driver_cost); // string?
+        console.log("✅ [ESTIMATE] Pricing Breakdown:", {
+            tourName, groupSize, language,
+            driverCost, entryFee, lunchCost,
+            markupPercent, taxBuffer, vatPercent,
+            languageFee, baseCost, markup, preVAT, totalVAT, totalPrice
+        });
 
         res.json({ estimatedPrice: totalPrice });
     } catch (err) {
-        console.error("Estimate error:", err);
+        console.error("❌ Estimate error:", err);
         res.status(500).json({ error: "Server error calculating price." });
     } finally {
         connection.release();
@@ -220,14 +227,18 @@ const { client, OrdersCreateRequest } = require('./paypal');
 app.post("/create-order", async (req, res) => {
     const { tourName, groupSize, language } = req.body;
 
+    console.log("🧾 [CREATE-ORDER] Input:", { tourName, groupSize, language });
+
     const connection = await pool.getConnection();
     try {
         const [tourResult] = await connection.query("SELECT * FROM tours WHERE title = ?", [tourName.trim()]);
-        if (tourResult.length === 0) return res.status(400).json({ error: "Tour not found" });
+        if (tourResult.length === 0) {
+            console.warn("⚠️ Tour not found for PayPal:", tourName);
+            return res.status(400).json({ error: "Tour not found" });
+        }
 
         const tour = tourResult[0];
 
-        // Ensure everything is parsed properly
         const driverCost = parseFloat(tour.fixed_driver_cost || 0);
         const entryFee = parseFloat(tour.entry_fee_per_person || 0);
         const lunchCost = parseFloat(tour.lunch_cost_per_person || 0);
@@ -243,8 +254,12 @@ app.post("/create-order", async (req, res) => {
 
         const totalPrice = Math.round(preVAT + totalVAT);
 
-        // Log to confirm everything is numeric
-        console.log({ baseCost, markup, preVAT, totalVAT, totalPrice });
+        console.log("✅ [CREATE-ORDER] Pricing Breakdown:", {
+            tourName, groupSize, language,
+            driverCost, entryFee, lunchCost,
+            markupPercent, taxBuffer, vatPercent,
+            languageFee, baseCost, markup, preVAT, totalVAT, totalPrice
+        });
 
         const request = new OrdersCreateRequest();
         request.prefer("return=representation");
@@ -253,7 +268,7 @@ app.post("/create-order", async (req, res) => {
             purchase_units: [{
                 amount: {
                     currency_code: "EUR",
-                    value: totalPrice.toString() // PayPal needs string here
+                    value: totalPrice.toString()
                 }
             }]
         });
@@ -261,7 +276,7 @@ app.post("/create-order", async (req, res) => {
         const order = await client().execute(request);
         res.json({ id: order.result.id });
     } catch (err) {
-        console.error("PayPal Order Error:", err);
+        console.error("❌ PayPal Order Error:", err);
         res.status(500).json({ error: "Payment setup failed." });
     } finally {
         connection.release();
