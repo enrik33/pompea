@@ -13,8 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
             : "https://pompea-backend.onrender.com";
 
     const today = new Date().toISOString().split("T")[0];
-    const maxDate = new Date();
-    maxDate.setFullYear(maxDate.getFullYear() + 1);
+    const maxDate = new Date(new Date().getFullYear(), 9, 30); // October = month 9 (0-indexed)
     const maxDateFormatted = maxDate.toISOString().split("T")[0];
 
     const dateInput = document.getElementById("date");
@@ -25,6 +24,98 @@ document.addEventListener("DOMContentLoaded", () => {
     const tourName = urlParams.get("tour");
     if (tourName) {
         document.getElementById("tourName").value = decodeURIComponent(tourName);
+    }
+
+    const honeypot = form.querySelector("#website").value;
+    if (honeypot !== "") {
+        alert("Spam detected. Submission blocked.");
+        return;
+    }
+
+    // Regex patterns
+    const nameRegex = /^[A-Za-z\s]{2,50}$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
+    const phoneRegex = /^\+?\d{8,15}$/;
+
+    // Field references
+    const nameInput = document.getElementById("name");
+    const emailInput = document.getElementById("email");
+    const phoneInput = document.getElementById("phone");
+    const groupSizeInput = document.getElementById("groupSize");
+
+    [nameInput, emailInput, phoneInput].forEach(input => {
+        input.addEventListener("paste", (e) => {
+            const pasted = e.clipboardData.getData("text");
+            if (!input.checkValidity() || pasted.length > input.maxLength) {
+                e.preventDefault();
+            }
+        });
+    });
+
+    const blockedDomains = ["tempmail.com", "mailinator.com", "10minutemail.com"];
+    if (blockedDomains.some(domain => email.endsWith("@" + domain))) {
+        return alert("Disposable emails are not allowed.");
+    }
+
+    // Real-time validation on blur
+    nameInput.addEventListener("blur", () =>
+        validateField(nameInput, nameRegex, "Name must be 2–50 letters only.")
+    );
+    emailInput.addEventListener("blur", () =>
+        validateField(emailInput, emailRegex, "Enter a valid email address.")
+    );
+    phoneInput.addEventListener("blur", () =>
+        validateField(phoneInput, phoneRegex, "Enter a valid phone number (8–15 digits).")
+    );
+    groupSizeInput.addEventListener("blur", () => validateGroupSize(groupSizeInput));
+    dateInput.addEventListener("blur", () => validateDateField(dateInput, today, maxDateFormatted));
+
+    function validateField(input, regex, errorMessage) {
+        const value = input.value.trim();
+        const label = input.closest(".form-group").querySelector("label");
+
+
+        if (!regex.test(value)) {
+            input.classList.add("error");
+            label.classList.add("error-label");
+            input.setCustomValidity(errorMessage);
+        } else {
+            input.classList.remove("error");
+            label.classList.remove("error-label");
+            input.setCustomValidity(""); // Reset error
+        }
+        input.reportValidity();
+    }
+
+    function validateDateField(input, minDate, maxDate) {
+        const value = input.value;
+        const label = input.closest(".form-group").querySelector("label");
+
+        if (!value || value < minDate || value > maxDate) {
+            input.classList.add("error");
+            label.classList.add("error-label");
+            input.setCustomValidity("Choose a valid date within the next year.");
+        } else {
+            input.classList.remove("error");
+            label.classList.remove("error-label");
+            input.setCustomValidity("");
+        }
+        input.reportValidity();
+    }
+
+    function validateGroupSize(input) {
+        const value = parseInt(input.value);
+        const label = input.closest(".form-group").querySelector("label");
+
+        if (isNaN(value) || value < 2 || value > 6) {
+            input.classList.add("error");
+            label.classList.add("error-label");
+            input.setCustomValidity("Group size must be between 2 and 6.");
+        } else {
+            input.classList.remove("error");
+            label.classList.remove("error-label");
+            input.setCustomValidity("");
+        }
     }
 
     function updatePaymentVisibility() {
