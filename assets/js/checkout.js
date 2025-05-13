@@ -52,11 +52,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    const blockedDomains = ["tempmail.com", "mailinator.com", "10minutemail.com"];
-    if (blockedDomains.some(domain => email.endsWith("@" + domain))) {
-        return alert("Disposable emails are not allowed.");
-    }
-
     // Real-time validation on blur
     nameInput.addEventListener("blur", () =>
         validateField(nameInput, nameRegex, "Name must be 2–50 letters only.")
