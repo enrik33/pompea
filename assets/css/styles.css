@@ -848,3 +848,21 @@ a.gmail:hover {
         /* Hide hamburger menu on desktops */
     }
 }
+
+@media screen and (min-width: 1200px) {
+    .tours-images {
+        overflow: hidden; /* Ensures content stays within the image box */
+    }
+
+    .text-block {
+        position: absolute;
+        bottom: 0;
+        background-color: rgba(87, 46, 58, 0.9); /* Semi-transparent background */
+        color: white;
+        font-size: 18px;
+        text-align: center;
+        width: 100%; /* Ensures it spans the entire width of the image */
+        padding: 10px;
+        box-sizing: border-box; /* Includes padding in width calculation */
+    }
+}
