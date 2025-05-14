@@ -855,7 +855,7 @@ a.gmail:hover {
 
     .text-block {
         position: absolute;
-        bottom: 80px;
+        bottom: 0;
         background-color: #572E3A;
         /* Semi-transparent background */
         opacity: 90%;
