@@ -158,13 +158,17 @@ a.nav:hover::after {
 
 .text-overlay-static {
     position: absolute;
-    bottom: 30px;
-    left: 40px;
+    bottom: 10px;
+    left: 15px;
     color: white;
     font-size: 2vw;
     font-weight: bold;
     text-shadow: 2px 2px 10px black;
-    z-index: 2;
+    z-index: 0;
+    max-width: 80%;
+    padding: 4px 8px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
 }
 
 .slide-overlay {
@@ -810,6 +814,32 @@ a.gmail:hover {
     /* Center indicators (dots) */
     .slideshow-dots {
         bottom: 15px;
+    }
+
+    .slide-card {
+        height: 300px;
+        /* or adjust as needed for mobile */
+    }
+
+    .slide-card img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .text-overlay-static {
+        position: absolute;
+        bottom: 10px;
+        left: 15px;
+        color: white;
+        font-size: 3vw;
+        font-weight: bold;
+        text-shadow: 2px 2px 10px black;
+        z-index: 0;
+        max-width: 80%;
+        padding: 4px 8px;
+        background-color: rgba(0, 0, 0, 0.2);
+        border-radius: 4px;
     }
 
     /* Ensure CTA section is well-balanced */
