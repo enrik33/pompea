@@ -865,4 +865,9 @@ a.gmail:hover {
         padding: 10px;
         box-sizing: border-box; /* Includes padding in width calculation */
     }
+
+    .slideshow-container img {
+        height: 500px; /* Slightly increased height for better vertical coverage */
+        object-fit: cover; /* Ensures the image scales proportionally */
+    }
 }
