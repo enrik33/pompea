@@ -848,7 +848,21 @@ a.gmail:hover {
         /* Hide hamburger menu on desktops */
     }
 
-    .text-block{
-        font-size: 12px;
+     .tours-images {
+        overflow: hidden; /* Ensures content stays within the image box */
+    }
+
+    .text-block {
+        position: absolute;
+        bottom: 80px;
+        background-color: #572E3A; /* Semi-transparent background */
+        opacity: 90%;
+        color: white;
+        font-size: 18px;
+        text-align: center;
+        width: 100%; /* Ensures it spans the entire width of the image */
+        padding: 10px 20px;
+        max-inline-size: 150px;
+        box-sizing: border-box; /* Includes padding in width calculation */
     }
 }
