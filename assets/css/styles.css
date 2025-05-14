@@ -847,4 +847,8 @@ a.gmail:hover {
         display: none;
         /* Hide hamburger menu on desktops */
     }
+
+    .text-block{
+        font-size: 20px;
+    }
 }
