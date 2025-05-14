@@ -137,4 +137,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
     window.addEventListener("resize", adjustTourGrid);
     adjustTourGrid();
+
+    document.querySelectorAll('.mySlides a').forEach(slide => {
+        slide.addEventListener('touchstart', () => {
+            const msg = document.createElement('div');
+            msg.innerText = 'Tap again to view tour';
+            msg.style.position = 'absolute';
+            msg.style.bottom = '20px';
+            msg.style.left = '50%';
+            msg.style.transform = 'translateX(-50%)';
+            msg.style.background = 'rgba(0,0,0,0.7)';
+            msg.style.color = '#fff';
+            msg.style.padding = '8px 14px';
+            msg.style.borderRadius = '6px';
+            msg.style.fontSize = '14px';
+            msg.style.zIndex = '1000';
+            document.body.appendChild(msg);
+            setTimeout(() => msg.remove(), 2000);
+        }, { once: true });
+    });
 });

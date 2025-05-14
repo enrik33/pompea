@@ -129,6 +129,104 @@ a.nav:hover::after {
     opacity: 80%;
 }
 
+.mySlides {
+    position: relative;
+    display: none;
+}
+
+.slide-link {
+    display: block;
+    position: relative;
+}
+
+.slide-card {
+    position: relative;
+    overflow: hidden;
+    height: 400px;
+}
+
+.slide-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.slide-card:hover img {
+    transform: scale(1.05);
+}
+
+.text-overlay-static {
+    position: absolute;
+    bottom: 30px;
+    left: 40px;
+    color: white;
+    font-size: 2vw;
+    font-weight: bold;
+    text-shadow: 2px 2px 10px black;
+    z-index: 2;
+}
+
+.slide-overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.slide-card:hover .slide-overlay {
+    opacity: 1;
+}
+
+.slide-content {
+    color: white;
+    text-align: center;
+    padding: 20px;
+    animation: fadeInUp 0.4s ease-out;
+}
+
+.slide-title {
+    font-size: 2.5vw;
+    margin-bottom: 10px;
+}
+
+.slide-info {
+    font-size: 1.5vw;
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+.slide-cta {
+    font-size: 1.7vw;
+    background-color: #ffcc00;
+    color: #003366;
+    padding: 10px 20px;
+    border-radius: 5px;
+    display: inline-block;
+    transition: transform 0.2s ease, background-color 0.3s;
+}
+
+.slide-cta:hover {
+    transform: scale(1.05);
+    background-color: #ff9900;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .slideshow-container {
     position: relative;
     margin: auto;
@@ -738,6 +836,18 @@ a.gmail:hover {
         grid-template-columns: 1fr;
         gap: 30px;
         justify-content: center;
+    }
+
+    .slide-content .slide-title {
+        font-size: 6vw;
+    }
+
+    .slide-content .slide-info {
+        font-size: 4.5vw;
+    }
+
+    .slide-content .slide-cta {
+        font-size: 4vw;
     }
 
     .why-us-section {
