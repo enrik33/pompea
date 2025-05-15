@@ -136,6 +136,14 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    function debounce(fn, delay) {
+        let timeoutId;
+        return function (...args) {
+            clearTimeout(timeoutId);
+            timeoutId = setTimeout(() => fn.apply(this, args), delay);
+        };
+    }
+
     async function fetchTourPriceEstimate() {
         const groupSize = parseInt(form.querySelector("#groupSize").value);
         const language = form.querySelector("#language").value;
@@ -167,8 +175,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    form.querySelector("#groupSize").addEventListener("input", fetchTourPriceEstimate);
-    form.querySelector("#language").addEventListener("change", fetchTourPriceEstimate);
+    const debouncedFetchPrice = debounce(fetchTourPriceEstimate, 300);
+    form.querySelector("#groupSize").addEventListener("input", debouncedFetchPrice);
+    form.querySelector("#language").addEventListener("change", debouncedFetchPrice);
 
     function getFormData() {
         return {
