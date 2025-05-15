@@ -209,6 +209,9 @@ document.addEventListener("DOMContentLoaded", () => {
     function renderPayPalButton() {
         if (typeof paypal === "undefined") return;
 
+        const paymentMethod = document.getElementById("paymentMethod").value;
+        if (paymentMethod !== "paypal") return;
+
         // Check if all required fields are valid
         const groupSize = parseInt(document.querySelector("#groupSize").value);
         const language = document.querySelector("#language").value;
