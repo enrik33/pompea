@@ -122,16 +122,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (payment === "paypal") {
             paypalContainer.classList.remove("hidden");
+            paypalContainer.innerHTML = ""; // Clear old PayPal button
+            renderPayPalButton();           // Render fresh with current data
         } else if (payment === "cash") {
             cashBtn.classList.remove("hidden");
         } else if (payment === "bank_transfer") {
             bankInfo.innerHTML = `
-                <div class="bank-message">
-                    Please transfer your total amount to:<br>
-                    <strong>IBAN:</strong> AL01234567890123456789012345<br>
-                    <strong>SWIFT:</strong> ALBXXXX<br>
-                    Include your full name as the payment reference.
-                </div>`;
+            <div class="bank-message">
+                Please transfer your total amount to:<br>
+                <strong>IBAN:</strong> AL01234567890123456789012345<br>
+                <strong>SWIFT:</strong> ALBXXXX<br>
+                Include your full name as the payment reference.
+            </div>`;
             bankInfo.classList.remove("hidden");
         }
     }
@@ -179,6 +181,16 @@ document.addEventListener("DOMContentLoaded", () => {
     form.querySelector("#groupSize").addEventListener("input", debouncedFetchPrice);
     form.querySelector("#language").addEventListener("change", debouncedFetchPrice);
 
+    const reRenderPayPal = debounce(() => {
+        const container = document.getElementById("paypal-button-container");
+        container.innerHTML = "";
+        renderPayPalButton();
+    }, 300);
+
+    form.querySelector("#groupSize").addEventListener("input", reRenderPayPal);
+    form.querySelector("#language").addEventListener("change", reRenderPayPal);
+
+
     function getFormData() {
         return {
             tourName: decodeURIComponent(tourName),
@@ -194,11 +206,37 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // PayPal button always renders
-    if (typeof paypal !== "undefined") {
+    function renderPayPalButton() {
+        if (typeof paypal === "undefined") return;
+
+        // Check if all required fields are valid
+        const groupSize = parseInt(document.querySelector("#groupSize").value);
+        const language = document.querySelector("#language").value;
+        const name = document.querySelector("#name").value.trim();
+        const email = document.querySelector("#email").value.trim();
+        const phone = document.querySelector("#phone").value.trim();
+        const date = document.querySelector("#date").value;
+
+        const nameRegex = /^[A-Za-z\s]{2,50}$/;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
+        const phoneRegex = /^\+?\d{8,15}$/;
+
+        const isValid =
+            nameRegex.test(name) &&
+            emailRegex.test(email) &&
+            phoneRegex.test(phone) &&
+            date &&
+            groupSize >= 2 &&
+            groupSize <= 6 &&
+            language;
+
+        if (!isValid) {
+            console.warn("⚠️ Not rendering PayPal button — form is incomplete or invalid.");
+            return;
+        }
+
         paypal.Buttons({
             createOrder: async () => {
-                const groupSize = parseInt(document.querySelector("#groupSize").value);
-                const language = document.querySelector("#language").value;
                 const res = await fetch(`${API_BASE_URL}/create-order`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
@@ -276,7 +314,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!validPayments.includes(paymentMethod)) return alert("Please select a valid payment method.");
         if (specialRequests.length > 500) return alert("Special requests must be under 500 characters.");
 
-        // ⛔ Skip submitting if PayPal is selected — use the PayPal button instead
+        // Skip submitting if PayPal is selected — use the PayPal button instead
         if (paymentMethod === "paypal") {
             alert("Please complete your payment using the PayPal button below.");
             return;
