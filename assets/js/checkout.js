@@ -209,9 +209,6 @@ document.addEventListener("DOMContentLoaded", () => {
     function renderPayPalButton() {
         if (typeof paypal === "undefined") return;
 
-        const paymentMethod = document.getElementById("paymentMethod").value;
-        if (paymentMethod !== "paypal") return;
-
         // Check if all required fields are valid
         const groupSize = parseInt(document.querySelector("#groupSize").value);
         const language = document.querySelector("#language").value;
@@ -233,16 +230,10 @@ document.addEventListener("DOMContentLoaded", () => {
             groupSize <= 6 &&
             language;
 
-        const hint = document.getElementById("paypal-hint");
-
         if (!isValid) {
             console.warn("⚠️ Not rendering PayPal button — form is incomplete or invalid.");
-            if (hint) hint.classList.remove("hidden");
             return;
         }
-
-        if (hint) hint.classList.add("hidden");
-
 
         paypal.Buttons({
             createOrder: async () => {
