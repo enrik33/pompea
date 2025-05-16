@@ -16,8 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const maxDate = new Date(new Date().getFullYear(), 9, 30); // October = month 9 (0-indexed)
     const maxDateFormatted = maxDate.toISOString().split("T")[0];
 
-    const dateInput = document.getElementById("date");
-
     const urlParams = new URLSearchParams(window.location.search);
     const tourName = urlParams.get("tour");
     if (tourName) {
@@ -79,22 +77,6 @@ document.addEventListener("DOMContentLoaded", () => {
         input.reportValidity();
     }
 
-    function validateDateField(input, minDate, maxDate) {
-        const value = input.value;
-        const label = input.closest(".form-group").querySelector("label");
-
-        if (!value || value < minDate || value > maxDate) {
-            input.classList.add("error");
-            label.classList.add("error-label");
-            input.setCustomValidity("Choose a valid date within the next year.");
-        } else {
-            input.classList.remove("error");
-            label.classList.remove("error-label");
-            input.setCustomValidity("");
-        }
-        input.reportValidity();
-    }
-
     function validateGroupSize(input) {
         const value = parseInt(input.value);
         const label = input.closest(".form-group").querySelector("label");
@@ -125,14 +107,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 disable: blockedDates,
                 disableMobile: true,
                 onDayCreate: function (dObj, dStr, fp, dayElem) {
-                    const date = dayElem.dateObj.toISOString().split("T")[0];
+                    const dateObj = dayElem.dateObj;
+                    const yyyy = dateObj.getFullYear();
+                    const mm = String(dateObj.getMonth() + 1).padStart(2, '0');
+                    const dd = String(dateObj.getDate()).padStart(2, '0');
+                    const formatted = `${yyyy}-${mm}-${dd}`;
+
                     const dot = document.createElement("span");
                     dot.classList.add("availability-dot");
 
-                    if (blockedDates.includes(date)) {
-                        dot.classList.add("booked");
+                    if (blockedDates.includes(formatted)) {
+                        dot.classList.add("booked"); // red
                     } else {
-                        dot.classList.add("available");
+                        dot.classList.add("available"); // green
                     }
 
                     dayElem.appendChild(dot);

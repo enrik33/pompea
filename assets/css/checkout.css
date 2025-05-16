@@ -83,13 +83,14 @@ textarea:focus {
 }
 
 #confirmation-message {
-    margin-top: 30px;
-    font-size: 16px;
-    text-align: center;
+    background-color: #e6ffee;
+    border: 1px solid #00b300;
+    color: #006600;
     padding: 15px;
-    border-radius: 8px;
-    background-color: #e6f7f1;
-    color: #006442;
+    border-radius: 6px;
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: center;
 }
 
 .hidden {
