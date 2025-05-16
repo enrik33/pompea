@@ -76,11 +76,12 @@ app.post("/book", async (req, res) => {
         language,
         specialRequests,
         pickupLat,
-        pickupLng
+        pickupLng,
+        pickupLabel
     } = req.body;
 
     const pickupInfo = pickupLat && pickupLng
-        ? `Pickup Location: https://www.google.com/maps?q=${pickupLat},${pickupLng}`
+        ? `Pickup Location: ${pickupLabel || "Unknown"}\nCoordinates: https://www.google.com/maps?q=${pickupLat},${pickupLng}`
         : "Pickup Location: Not specified";
 
     if (

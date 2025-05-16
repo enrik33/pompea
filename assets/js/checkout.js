@@ -120,7 +120,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 pickupLatInput.value = lat.toFixed(6);
                 pickupLngInput.value = lng.toFixed(6);
-                pickupSummary.innerText = `📍 Selected: ${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+                fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const locationName = data.display_name || "Unknown location";
+                        pickupSummary.innerHTML = `📍 <strong>${locationName}</strong><br>(${lat.toFixed(6)}, ${lng.toFixed(6)})`;
+                        document.getElementById("pickupLabel").value = locationName;
+
+                        // Optionally attach popup to the marker
+                        marker.bindPopup(locationName).openPopup();
+                    })
+                    .catch(() => {
+                        pickupSummary.innerHTML = `📍 Selected: ${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+                    });
+
             });
 
             // Try to locate user's current position
@@ -298,6 +311,7 @@ document.addEventListener("DOMContentLoaded", () => {
             specialRequests: form.querySelector("#specialRequests").value.trim(),
             pickupLat: document.getElementById("pickupLat").value,
             pickupLng: document.getElementById("pickupLng").value,
+            pickupLabel: document.getElementById("pickupLabel").value,
         };
     }
 
