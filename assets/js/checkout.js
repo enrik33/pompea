@@ -231,7 +231,7 @@ document.addEventListener("DOMContentLoaded", () => {
             language;
 
         if (!isValid) {
-            console.warn("⚠️ Not rendering PayPal button — form is incomplete or invalid.");
+            console.warn("Not rendering PayPal button — form is incomplete or invalid.");
             return;
         }
 

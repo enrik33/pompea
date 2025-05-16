@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const pool = require('./db');
+const nodemailer = require('nodemailer');
+const OpenAI = require("openai");
 
 dotenv.config();
 
@@ -16,8 +18,6 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 app.options('*', cors(corsOptions));
-
-const OpenAI = require("openai");
 
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
@@ -156,7 +156,64 @@ app.post("/book", async (req, res) => {
         );
 
         await connection.commit();
-        res.json({ message: `✅ Reservation received! Total: €${totalPrice}` });
+        // Email messages
+        const adminMsg = `
+🧭 New Tour Booking:
+
+Tour: ${tourName}
+Date: ${date}
+Group Size: ${groupSize}
+Language: ${language}
+Payment: ${paymentMethod}
+
+Name: ${name}
+Email: ${email}
+Phone: ${phone}
+Requests: ${specialRequests || "None"}
+Total: €${totalPrice}
+`;
+
+        const userMsg = `
+Hi ${name},
+
+✅ Thank you for booking a tour with Pompea Tours!
+
+Here are your reservation details:
+- Tour: ${tourName}
+- Date: ${date}
+- Group Size: ${groupSize}
+- Preferred Language: ${language}
+- Payment Method: ${paymentMethod.replace("_", " ")}
+- Total Price: €${totalPrice}
+
+We'll contact you shortly to confirm your trip!
+
+Pompea Tours & Travel
+`;
+
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.EMAIL_USER,
+                pass: process.env.EMAIL_PASS,
+            },
+        });
+
+        await transporter.sendMail({
+            from: 'Pompea Tours <noreply@pompeatours.com>',
+            to: process.env.ADMIN_EMAIL,
+            subject: `New Booking - ${tourName}`,
+            text: adminMsg
+        });
+
+        await transporter.sendMail({
+            from: 'Pompea Tours <noreply@pompeatours.com>',
+            to: email,
+            subject: `Your Tour Reservation - ${tourName}`,
+            text: userMsg
+        });
+
+        res.json({ message: `✅ Reservation received! Total: €${totalPrice}. Confirmation sent to ${email}.` });
     } catch (error) {
         await connection.rollback();
         console.error("Booking error:", error);
