@@ -17,8 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const maxDateFormatted = maxDate.toISOString().split("T")[0];
 
     const dateInput = document.getElementById("date");
-    dateInput.setAttribute("min", today);
-    dateInput.setAttribute("max", maxDateFormatted);
 
     const urlParams = new URLSearchParams(window.location.search);
     const tourName = urlParams.get("tour");
@@ -63,7 +61,6 @@ document.addEventListener("DOMContentLoaded", () => {
         validateField(phoneInput, phoneRegex, "Enter a valid phone number (8–15 digits).")
     );
     groupSizeInput.addEventListener("blur", () => validateGroupSize(groupSizeInput));
-    dateInput.addEventListener("blur", () => validateDateField(dateInput, today, maxDateFormatted));
 
     function validateField(input, regex, errorMessage) {
         const value = input.value.trim();
@@ -112,6 +109,53 @@ document.addEventListener("DOMContentLoaded", () => {
             input.setCustomValidity("");
         }
     }
+
+    let blockedDates = [];
+
+    async function fetchBlockedDatesAndInit() {
+        try {
+            const res = await fetch(`${API_BASE_URL}/booked-dates`);
+            const result = await res.json();
+            blockedDates = result.bookedDates || [];
+
+            flatpickr("#date", {
+                dateFormat: "Y-m-d",
+                minDate: today,
+                maxDate: maxDateFormatted,
+                disable: blockedDates,
+                disableMobile: true,
+                onDayCreate: function (dObj, dStr, fp, dayElem) {
+                    const date = dayElem.dateObj.toISOString().split("T")[0];
+                    const dot = document.createElement("span");
+                    dot.classList.add("availability-dot");
+
+                    if (blockedDates.includes(date)) {
+                        dot.classList.add("booked");
+                    } else {
+                        dot.classList.add("available");
+                    }
+
+                    dayElem.appendChild(dot);
+                },
+                onChange: (selectedDates, dateStr, instance) => {
+                    if (blockedDates.includes(dateStr)) {
+                        alert("❌ That date is already booked. Please select another.");
+                        instance.clear();
+                    }
+                },
+                onClose: (selectedDates, dateStr, instance) => {
+                    if (blockedDates.includes(dateStr)) {
+                        alert("❌ That date is already booked.");
+                        instance.clear();
+                    }
+                }
+            });
+        } catch (err) {
+            console.error("❌ Failed to load booked dates:", err);
+        }
+    }
+
+    fetchBlockedDatesAndInit();
 
     function updatePaymentVisibility() {
         const payment = document.getElementById("paymentMethod").value;
@@ -302,6 +346,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const phone = form.querySelector("#phone").value.trim();
         const groupSize = parseInt(form.querySelector("#groupSize").value);
         const selectedDate = form.querySelector("#date").value;
+        if (blockedDates.includes(selectedDate)) {
+            alert("That date is already fully booked. Please choose another.");
+            return;
+        }
         const paymentMethod = form.querySelector("#paymentMethod").value;
         const language = form.querySelector("#language").value;
         const specialRequests = form.querySelector("#specialRequests").value.trim();

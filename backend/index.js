@@ -320,5 +320,24 @@ app.post("/create-order", async (req, res) => {
     }
 });
 
+app.get("/booked-dates", async (req, res) => {
+    const connection = await pool.getConnection();
+
+    try {
+        const [results] = await connection.query(
+            "SELECT DISTINCT booking_date FROM bookings"
+        );
+
+        const bookedDates = results.map(row => row.booking_date.toISOString().split("T")[0]);
+        res.json({ bookedDates });
+    } catch (err) {
+        console.error("Error fetching booked dates:", err);
+        res.status(500).json({ error: "Could not retrieve booked dates." });
+    } finally {
+        connection.release();
+    }
+});
+
+
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, '0.0.0.0', () => console.log(`Pompea AI backend running on port ${PORT}`));
