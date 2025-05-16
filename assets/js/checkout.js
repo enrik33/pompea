@@ -92,6 +92,69 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    let map, marker;
+    const mapModal = document.getElementById("mapModal");
+    const openMapBtn = document.getElementById("openMapBtn");
+    const confirmLocationBtn = document.getElementById("confirmLocationBtn");
+    const pickupSummary = document.getElementById("pickupSummary");
+    const pickupLatInput = document.getElementById("pickupLat");
+    const pickupLngInput = document.getElementById("pickupLng");
+
+    openMapBtn.addEventListener("click", () => {
+        mapModal.classList.remove("hidden");
+
+        if (!map) {
+            map = L.map('map').setView([39.870, 20.005], 13); // Fallback center (Saranda)
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap contributors'
+            }).addTo(map);
+
+            map.on('click', (e) => {
+                const { lat, lng } = e.latlng;
+                if (marker) {
+                    marker.setLatLng([lat, lng]);
+                } else {
+                    marker = L.marker([lat, lng]).addTo(map);
+                }
+
+                pickupLatInput.value = lat.toFixed(6);
+                pickupLngInput.value = lng.toFixed(6);
+                pickupSummary.innerText = `📍 Selected: ${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+            });
+
+            // Try to locate user's current position
+            map.locate({ setView: true, maxZoom: 16 });
+
+            map.on('locationfound', (e) => {
+                const { lat, lng } = e.latlng;
+                if (!marker) {
+                    marker = L.marker([lat, lng]).addTo(map);
+                } else {
+                    marker.setLatLng([lat, lng]);
+                }
+
+                pickupLatInput.value = lat.toFixed(6);
+                pickupLngInput.value = lng.toFixed(6);
+                pickupSummary.innerText = `📍 Detected location: ${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+            });
+
+            map.on('locationerror', () => {
+                console.warn("⚠️ Could not get user's location — using default center.");
+            });
+        } else {
+            map.invalidateSize(); // Ensures map resizes correctly if reopened
+        }
+    });
+
+    confirmLocationBtn.addEventListener("click", () => {
+        if (!pickupLatInput.value || !pickupLngInput.value) {
+            alert("Please select a location on the map first.");
+            return;
+        }
+        mapModal.classList.add("hidden");
+    });
+
     let blockedDates = [];
 
     async function fetchBlockedDatesAndInit() {
@@ -232,7 +295,9 @@ document.addEventListener("DOMContentLoaded", () => {
             phone: form.querySelector("#phone").value.trim(),
             paymentMethod: "paypal", // always "paypal" for this case
             language: form.querySelector("#language").value,
-            specialRequests: form.querySelector("#specialRequests").value.trim()
+            specialRequests: form.querySelector("#specialRequests").value.trim(),
+            pickupLat: document.getElementById("pickupLat").value,
+            pickupLng: document.getElementById("pickupLng").value,
         };
     }
 

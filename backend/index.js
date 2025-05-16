@@ -75,7 +75,13 @@ app.post("/book", async (req, res) => {
         paymentMethod,
         language,
         specialRequests,
+        pickupLat,
+        pickupLng
     } = req.body;
+
+    const pickupInfo = pickupLat && pickupLng
+        ? `Pickup Location: https://www.google.com/maps?q=${pickupLat},${pickupLng}`
+        : "Pickup Location: Not specified";
 
     if (
         !["paypal", "bank_transfer", "cash"].includes(paymentMethod) ||
@@ -171,6 +177,8 @@ Email: ${email}
 Phone: ${phone}
 Requests: ${specialRequests || "None"}
 Total: €${totalPrice}
+
+${pickupInfo}
 `;
 
         const userMsg = `
@@ -185,6 +193,7 @@ Here are your reservation details:
 - Preferred Language: ${language}
 - Payment Method: ${paymentMethod.replace("_", " ")}
 - Total Price: €${totalPrice}
+- ${pickupInfo}
 
 We'll contact you shortly to confirm your trip!
 

@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="assets/css/checkout.css">
     <script src="assets/js/checkout.js" defer></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script
@@ -57,6 +59,14 @@
             <div class="form-group">
                 <label for="groupSize">Number of People (2-6):</label>
                 <input type="number" id="groupSize" name="groupSize" min="2" max="6" required>
+            </div>
+
+            <div class="form-group">
+                <label for="pickupLocation">Pickup Location:</label>
+                <button type="button" id="openMapBtn">Choose on Map</button>
+                <div id="pickupSummary" style="margin-top: 5px; font-size: 0.9rem;"></div>
+                <input type="hidden" id="pickupLat" name="pickupLat">
+                <input type="hidden" id="pickupLng" name="pickupLng">
             </div>
 
             <div class="form-group">
@@ -131,6 +141,15 @@
             </div>
         </div>
     </footer>
+
+    <div id="mapModal" class="hidden">
+        <div id="mapOverlay"></div>
+        <div id="mapContainer">
+            <h2>Pick your location</h2>
+            <div id="map" style="height: 300px;"></div>
+            <button id="confirmLocationBtn">Confirm Location</button>
+        </div>
+    </div>
 </body>
 
 </html>
