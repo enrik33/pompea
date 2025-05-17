@@ -80,10 +80,6 @@ app.post("/book", async (req, res) => {
         pickupLabel
     } = req.body;
 
-    const pickupInfo = pickupLat && pickupLng
-        ? `Pickup Location: ${pickupLabel || "Unknown"}\nCoordinates: https://www.google.com/maps?q=${pickupLat},${pickupLng}`
-        : "Pickup Location: Not specified";
-
     if (
         !["paypal", "bank_transfer", "cash"].includes(paymentMethod) ||
         isNaN(groupSize) || groupSize < 2 || groupSize > 6 ||
@@ -165,40 +161,64 @@ app.post("/book", async (req, res) => {
         await connection.commit();
         // Email messages
         const adminMsg = `
-🧭 New Tour Booking:
+🧭 New Tour Booking Received!
 
+📌 Booking Summary:
+---------------------------
 Tour: ${tourName}
 Date: ${date}
-Group Size: ${groupSize}
-Language: ${language}
-Payment: ${paymentMethod}
+Number of Adults: ${groupSize}
+Language Guide: ${language}
+Payment Method: ${paymentMethod}
+Total Price: €${totalPrice}
+---------------------------
 
+📍 Pickup Location:
+${pickupLabel || "Not specified"}
+${pickupLat && pickupLng ? `Map: https://www.google.com/maps?q=${pickupLat},${pickupLng}` : ''}
+
+👤 Customer Information:
 Name: ${name}
 Email: ${email}
 Phone: ${phone}
-Requests: ${specialRequests || "None"}
-Total: €${totalPrice}
 
-${pickupInfo}
+📎 Special Requests:
+${specialRequests && specialRequests.trim() !== '' ? specialRequests : 'None'}
+
+🕒 Booking Timestamp: ${new Date().toLocaleString()}
+
+Please check the system to confirm availability and prepare for this tour. 
+Respond to the customer if any clarification is needed.
+
+— Pompea Tours Booking System
 `;
-
+        const userSubject = `Booking Confirmation – ${tourName} with Pompea Tours & Travel`;
         const userMsg = `
-Hi ${name},
+Dear ${name},
 
-✅ Thank you for booking a tour with Pompea Tours!
+Thank you for booking with Pompea Tours & Travel. We are happy to welcome you on board and to be part of your exploration of Albania.
 
-Here are your reservation details:
-- Tour: ${tourName}
-- Date: ${date}
-- Group Size: ${groupSize}
-- Preferred Language: ${language}
-- Payment Method: ${paymentMethod.replace("_", " ")}
-- Total Price: €${totalPrice}
-- ${pickupInfo}
+Your reservation has been successfully booked.
 
-We'll contact you shortly to confirm your trip!
+Booking Details:
+
+Tour: ${tourName}
+Date: ${date}
+Number of Adults: ${groupSize}
+Pick up location: ${pickupLabel || "Not specified"}
+Language guide: ${language}
+Payment Method: ${paymentMethod.replace("_", " ")}
+Total Price: €${totalPrice}
+
+If you have any further questions, need to change the reservation, or have any specific requests, please reply to this email.
+
+We guarantee a response within 24 hours of receiving your email.
+
+See you soon,
 
 Pompea Tours & Travel
+Your Journey. Your Story
+Instagram | Facebook
 `;
 
         const transporter = nodemailer.createTransport({
@@ -209,6 +229,7 @@ Pompea Tours & Travel
             },
         });
 
+        // Send admin notification
         await transporter.sendMail({
             from: 'Pompea Tours <noreply@pompeatours.com>',
             to: process.env.ADMIN_EMAIL,
@@ -216,11 +237,65 @@ Pompea Tours & Travel
             text: adminMsg
         });
 
+        // Send user confirmation with embedded logo
         await transporter.sendMail({
             from: 'Pompea Tours <noreply@pompeatours.com>',
             to: email,
-            subject: `Your Tour Reservation - ${tourName}`,
-            text: userMsg
+            subject: userSubject,
+            text: userMsg,
+            html: `
+    <p>Dear ${name},</p>
+    <p>Thank you for booking with <strong>Pompea Tours & Travel</strong>. We are happy to welcome you on board and to be part of your exploration of Albania.</p>
+    <p>Your reservation has been successfully booked.</p>
+
+    <h3>Booking Details:</h3>
+    <ul>
+      <li><strong>Tour:</strong> ${tourName}</li>
+      <li><strong>Date:</strong> ${date}</li>
+      <li><strong>Number of Adults:</strong> ${groupSize}</li>
+      <li><strong>Pick up location:</strong> ${pickupLabel || "Not specified"}</li>
+      <li><strong>Language guide:</strong> ${language}</li>
+      <li><strong>Payment Method:</strong> ${paymentMethod.replace("_", " ")}</li>
+      <li><strong>Total Price:</strong> €${totalPrice}</li>
+    </ul>
+
+    <p>If you have any further questions, need to change the reservation, or have any specific requests, please reply to this email.</p>
+    <p>We guarantee a response within 24 hours of receiving your email.</p>
+
+    <p>See you soon,</p>
+
+    <br><br>
+    <p style="font-family: sans-serif; font-size: 14px; line-height: 1.5; text-align: center;">
+  <strong>Pompea Tours & Travel</strong><br>
+  Your Journey. Your Story<br><br>
+
+  <a href="https://www.instagram.com/pompeatours/" target="_blank" style="margin-right: 10px;">
+    <img src="cid:instagram-icon" alt="Instagram" width="28" style="vertical-align: middle;">
+  </a>
+  <a href="https://www.facebook.com/profile.php?id=61576377955556" target="_blank">
+    <img src="cid:facebook-icon" alt="Facebook" width="28" style="vertical-align: middle;">
+  </a><br><br>
+
+  <img src="cid:pompea-logo" alt="Pompea Tours Logo" width="180" style="margin-top: 10px;">
+</p>
+  `,
+            attachments: [
+                {
+                    filename: 'logua.jpg',
+                    path: __dirname + '/public/images/logua.jpg',
+                    cid: 'pompea-logo'
+                },
+                {
+                    filename: 'instagram.svg',
+                    path: __dirname + '/public/images/instagram.svg',
+                    cid: 'instagram-icon'
+                },
+                {
+                    filename: 'facebook.svg',
+                    path: __dirname + '/public/images/facebook.svg',
+                    cid: 'facebook-icon'
+                }
+            ]
         });
 
         res.json({ message: `✅ Reservation received! Total: €${totalPrice}. Confirmation sent to ${email}.` });

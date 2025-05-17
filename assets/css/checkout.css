@@ -25,6 +25,14 @@ label {
     color: #003366;
 }
 
+.hidden-native-picker::-webkit-calendar-picker-indicator {
+    opacity: 0;
+}
+
+.hidden-native-picker {
+    caret-color: transparent;
+}
+
 .flatpickr-day .availability-dot {
     display: block;
     width: 6px;

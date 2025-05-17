@@ -199,6 +199,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
 
                     dayElem.appendChild(dot);
+                }, onReady: () => {
+                    document.getElementById("date").classList.remove("hidden-native-picker");
                 },
                 onChange: (selectedDates, dateStr, instance) => {
                     if (blockedDates.includes(dateStr)) {
@@ -259,6 +261,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!tourName || isNaN(groupSize) || groupSize < 2 || groupSize > 6) return;
 
         try {
+            pricePreview.innerHTML = `<em>Loading price...</em>`;
             const res = await fetch(`${API_BASE_URL}/estimate`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -443,7 +446,10 @@ document.addEventListener("DOMContentLoaded", () => {
             phone,
             paymentMethod,
             language,
-            specialRequests
+            specialRequests,
+            pickupLat: document.getElementById("pickupLat").value,
+            pickupLng: document.getElementById("pickupLng").value,
+            pickupLabel: document.getElementById("pickupLabel").value
         };
 
         submitBtn.disabled = true;
