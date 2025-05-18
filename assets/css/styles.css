@@ -953,6 +953,35 @@ a.gmail:hover {
         font-size: 4vw;
     }
 
+    .feedback-section p {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        text-align: center;
+    }
+
+    .feedback-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px 14px;
+        margin: 4px;
+        font-size: 16px;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    .feedback-link i {
+        margin-right: 6px;
+    }
+
+    .feedback-link img,
+    .feedback-link i {
+        font-size: 18px;
+        vertical-align: middle;
+    }
+
     .links {
         display: flex;
         flex-direction: column;
