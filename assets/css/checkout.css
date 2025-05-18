@@ -33,25 +33,27 @@ label {
     caret-color: transparent;
 }
 
+.flatpickr-day {
+    position: relative;
+}
+
 .flatpickr-day .availability-dot {
-    display: block;
+    position: absolute;
+    top: 4px;
+    left: 50%;
+    transform: translateX(-50%);
     width: 6px;
     height: 6px;
-    margin: 0 auto;
-    margin-top: 2px;
     border-radius: 50%;
-    position: relative;
     z-index: 2;
 }
 
 .flatpickr-day .available {
     background-color: #00b300;
-    /* green */
 }
 
 .flatpickr-day .booked {
     background-color: #cc0000;
-    /* red */
 }
 
 input,
