@@ -133,14 +133,12 @@ app.post("/book", async (req, res) => {
         const markupPercent = parseFloat(tour.markup_percentage || 0);
         const vatPercent = parseFloat(tour.vat_percentage || 0);
         const taxBuffer = parseFloat(tour.fixed_tax_buffer || 0);
-        const languageFee = language !== "english" ? 70 : 0;
 
-        const baseCost = driverCost + (entryFee * groupSize) + (lunchCost * groupSize) + languageFee;
+        const baseCost = driverCost + (entryFee * groupSize) + (lunchCost * groupSize);
         const markup = (baseCost * markupPercent) / 100;
         const preVAT = baseCost + markup + taxBuffer;
         const totalVAT = (preVAT * vatPercent) / 100;
-
-        const totalPrice = Math.round(preVAT + totalVAT);
+        const totalPrice = Math.round(preVAT + totalVAT + (language !== "english" ? 70 : 0));
 
         // Insert booking
         await connection.query(
@@ -335,14 +333,12 @@ app.post("/estimate", async (req, res) => {
         const markupPercent = parseFloat(tour.markup_percentage || 0);
         const vatPercent = parseFloat(tour.vat_percentage || 0);
         const taxBuffer = parseFloat(tour.fixed_tax_buffer || 0);
-        const languageFee = language !== "english" ? 70 : 0;
 
-        const baseCost = driverCost + (entryFee * groupSize) + (lunchCost * groupSize) + languageFee;
+        const baseCost = driverCost + (entryFee * groupSize) + (lunchCost * groupSize);
         const markup = (baseCost * markupPercent) / 100;
         const preVAT = baseCost + markup + taxBuffer;
         const totalVAT = (preVAT * vatPercent) / 100;
-
-        const totalPrice = Math.round(preVAT + totalVAT);
+        const totalPrice = Math.round(preVAT + totalVAT + (language !== "english" ? 70 : 0));
 
         res.json({ estimatedPrice: totalPrice });
     } catch (err) {
@@ -374,14 +370,12 @@ app.post("/create-order", async (req, res) => {
         const markupPercent = parseFloat(tour.markup_percentage || 0);
         const vatPercent = parseFloat(tour.vat_percentage || 0);
         const taxBuffer = parseFloat(tour.fixed_tax_buffer || 0);
-        const languageFee = language !== "english" ? 70 : 0;
 
-        const baseCost = driverCost + (entryFee * groupSize) + (lunchCost * groupSize) + languageFee;
+        const baseCost = driverCost + (entryFee * groupSize) + (lunchCost * groupSize);
         const markup = (baseCost * markupPercent) / 100;
         const preVAT = baseCost + markup + taxBuffer;
         const totalVAT = (preVAT * vatPercent) / 100;
-
-        const totalPrice = Math.round(preVAT + totalVAT);
+        const totalPrice = Math.round(preVAT + totalVAT + (language !== "english" ? 70 : 0));
 
         const request = new OrdersCreateRequest();
         request.prefer("return=representation");
