@@ -31,20 +31,20 @@ You're a smart tour recommender for Pompea Tours in Albania. Based on the user's
 
 Here are the tour options:
 
-1. Butrinti & Blue Eye – Best for: Short (3–4h), nature, relaxation.
-2. Saranda & Gjirokastra – Best for: Standard (5–6h), culture, history.
-3. Museum Package – Best for: Full (7–9h), history, both.
-4. Permeti – Best for: Full (7–9h), nature, adventure.
-5. Himara – Best for: Full (7–9h), coastal nature, relaxation.
-6. Gjirokastra + Blue Eye – Best for: Full (7–9h), both, adventure.
-7. Butrinti & Saranda Highlights – Best for: Full (7–9h), history + swimming, all-around mix.
+1. Butrinti & Blue Eye – Best for: Short (5–6h), nature, history, no lunch.
+2. Saranda & Gjirokastra – Best for: Full (8–9h), culture, architecture, history.
+3. Museum Package – Best for: Standard (6–7h), history, traditions.
+4. Permeti – Best for: Full (8–9h), nature, thermal baths, relaxation.
+5. Himara – Best for: Full (8h), coast, swimming, relaxation.
+6. Gjirokastra + Blue Eye – Best for: Full (8–9h), mixed nature & history.
+7. Butrinti & Saranda Highlights – Best for: Standard (7–8h), ruins + beach + views.
 
 The user wants:
 - Experience: ${experience}
 - Duration (Short / Standard / Full): ${duration}
 - Preference: ${preference}
 
-Recommend the best matching tour from the list above. 
+Recommend the best matching tour from the list above.
 `;
 
 

@@ -55,8 +55,8 @@ window.onload = function () {
         "Museum Package": "../tours/Museum.html",
         "Permeti": "../tours/Permeti_tour.html",
         "Himara": "../tours/Himara_tour.html",
-        "Gjirokastra + Blue Eye": "../tours/Gjirokastra_Blue_Eye.html",
-        "Butrinti & Saranda Highlights": "../tours/Butrinti_Saranda_Highlights.html"
+        "Gjirokastra + Blue Eye": "../tours/Gjirokastra&Blue_Eye.html",
+        "Butrinti & Saranda Highlights": "../tours/Butrinti&Saranda_tour.html"
     };
 
     findMyTourButton.addEventListener("click", async function (e) {
