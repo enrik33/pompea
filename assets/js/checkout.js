@@ -366,9 +366,16 @@ document.addEventListener("DOMContentLoaded", () => {
             onApprove: async (data, actions) => {
                 try {
                     const details = await actions.order.capture();
+
+                    if (details.status !== "COMPLETED") {
+                        alert("❌ Payment could not be verified. Please try again or use another method.");
+                        return;
+                    }
+
                     alert("✅ Payment completed by " + details.payer.name.given_name);
 
                     const bookingData = getFormData();
+                    bookingData.transactionId = details.id;
 
                     const res = await fetch(`${API_BASE_URL}/book`, {
                         method: "POST",
@@ -387,7 +394,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     } else {
                         alert(result.error || "Payment was successful, but booking failed.");
                     }
-
                 } catch (err) {
                     console.error("Booking error after PayPal:", err);
                     alert("Something went wrong after payment. Please contact support.");

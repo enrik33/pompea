@@ -77,7 +77,8 @@ app.post("/book", async (req, res) => {
         specialRequests,
         pickupLat,
         pickupLng,
-        pickupLabel
+        pickupLabel,
+        transactionId
     } = req.body;
 
     if (
@@ -88,6 +89,33 @@ app.post("/book", async (req, res) => {
         !/^\+?\d{8,15}$/.test(phone)
     ) {
         return res.status(400).json({ error: "Invalid input data." });
+    }
+
+    // Verify PayPal transaction if selected
+    let payerEmail = null;
+    let payerName = null;
+
+    if (paymentMethod === 'paypal') {
+        if (!transactionId) {
+            return res.status(400).json({ error: "Missing PayPal transaction ID." });
+        }
+
+        try {
+            const paypal = require('@paypal/checkout-server-sdk');
+            const { client } = require('./paypal');
+            const response = await client().execute(new paypal.orders.OrdersGetRequest(transactionId));
+            const order = response.result;
+
+            if (order.status !== 'COMPLETED') {
+                return res.status(400).json({ error: "PayPal payment not completed." });
+            }
+
+            payerEmail = order.payer.email_address;
+            payerName = order.payer.name.given_name + ' ' + order.payer.name.surname;
+        } catch (error) {
+            console.error("PayPal verification failed:", error);
+            return res.status(500).json({ error: "Failed to verify PayPal payment." });
+        }
     }
 
     const connection = await pool.getConnection();
@@ -168,6 +196,7 @@ Date: ${date}
 Number of Adults: ${groupSize}
 Language Guide: ${language}
 Payment Method: ${paymentMethod}
+${paymentMethod === 'paypal' ? `\n🧾 PayPal Transaction:\nID: ${transactionId}\nPayer: ${payerName} (${payerEmail})\n` : ''}
 Total Price: €${totalPrice}
 ---------------------------
 
