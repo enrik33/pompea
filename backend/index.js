@@ -15,6 +15,7 @@ const corsOptions = {
         'https://www.pompeatours.com',
         'https://pompeatours.com',
         'https://enrik33.github.io',
+        'https://pompea-tours.onrender.com',
         'http://localhost:4000'
     ],
     methods: ['GET', 'POST'],
@@ -38,13 +39,28 @@ app.use(
                 defaultSrc: ["'self'"],
                 scriptSrc: [
                     "'self'",
-                    "https://code.jquery.com",    // ✅ allow jQuery CDN
-                    "'unsafe-inline'"             // ✅ allow inline scripts (like onclick handlers)
+                    "https://code.jquery.com",
+                    "https://cdn.jsdelivr.net",
+                    "https://unpkg.com",
+                    "https://www.paypal.com",
+                    "'unsafe-inline'"
                 ],
-                styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+                styleSrc: [
+                    "'self'",
+                    "'unsafe-inline'",
+                    "https://fonts.googleapis.com",
+                    "https://cdnjs.cloudflare.com",
+                    "https://cdn.jsdelivr.net",
+                    "https://unpkg.com"
+                ],
+                fontSrc: ["'self'", "https://fonts.gstatic.com", "https://cdnjs.cloudflare.com"],
                 imgSrc: ["'self'", "data:", "https:"],
-                fontSrc: ["'self'", "https://fonts.gstatic.com"],
-                connectSrc: ["'self'", "https://pompea-backend.onrender.com"], // adjust as needed
+                connectSrc: [
+                    "'self'",
+                    "https://pompea-backend.onrender.com"
+                ],
+                frameSrc: ["https://www.google.com", "https://www.paypal.com"], // for PayPal and maps
+                scriptSrcAttr: ["'unsafe-inline'"], // fix inline handlers
             },
         },
     })
