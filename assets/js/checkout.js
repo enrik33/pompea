@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const API_BASE_URL =
         location.hostname === "localhost" || location.hostname === "127.0.0.1"
             ? "http://localhost:4000"
-            : "https://pompea-backend.onrender.com";
+            : "https://pompea-tours.onrender.com";
 
     const today = new Date().toISOString().split("T")[0];
     const maxDate = new Date(new Date().getFullYear(), 9, 30); // October = month 9 (0-indexed)

@@ -15,7 +15,7 @@ window.onload = function () {
     const API_BASE_URL =
         location.hostname === "localhost" || location.hostname === "127.0.0.1"
             ? "http://localhost:4000"
-            : "https://pompea-backend.onrender.com";
+            : "https://pompea-tours.onrender.com";
 
 
     function showStep(index) {

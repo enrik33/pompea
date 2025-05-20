@@ -57,7 +57,7 @@ app.use(
                 imgSrc: ["'self'", "data:", "https:"],
                 connectSrc: [
                     "'self'",
-                    "https://pompea-backend.onrender.com"
+                    "https://pompea-tours.onrender.com"
                 ],
                 frameSrc: ["https://www.google.com", "https://www.paypal.com"], // for PayPal and maps
                 scriptSrcAttr: ["'unsafe-inline'"], // fix inline handlers
