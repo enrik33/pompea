@@ -170,6 +170,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let blockedDates = [];
 
+    const dateInput = document.getElementById("date");
+    dateInput.disabled = true;
+
     async function fetchBlockedDatesAndInit() {
         try {
             const res = await fetch(`${API_BASE_URL}/booked-dates`);
@@ -200,6 +203,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     dayElem.appendChild(dot);
                 }, onReady: () => {
+                    dateInput.disabled = false;
                     document.getElementById("date").classList.remove("hidden-native-picker");
                 },
                 onChange: (selectedDates, dateStr, instance) => {
@@ -410,6 +414,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
+
+        const honeypot = form.querySelector("#website").value;
+        if (honeypot !== "") {
+            alert("Spam detected. Submission blocked.");
+            return;
+        }
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
         const phoneRegex = /^\+?\d{8,15}$/;

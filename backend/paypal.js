@@ -1,10 +1,13 @@
 const checkoutNodeJssdk = require('@paypal/checkout-server-sdk');
 
 function environment() {
-    let clientId = process.env.PAYPAL_CLIENT_ID;
-    let clientSecret = process.env.PAYPAL_CLIENT_SECRET;
+    const clientId = process.env.PAYPAL_CLIENT_ID;
+    const clientSecret = process.env.PAYPAL_CLIENT_SECRET;
+    const mode = process.env.PAYPAL_MODE || 'sandbox'; // default fallback
 
-    return new checkoutNodeJssdk.core.SandboxEnvironment(clientId, clientSecret);
+    return mode === 'live'
+        ? new checkoutNodeJssdk.core.LiveEnvironment(clientId, clientSecret)
+        : new checkoutNodeJssdk.core.SandboxEnvironment(clientId, clientSecret);
 }
 
 function client() {

@@ -4,20 +4,34 @@ const dotenv = require('dotenv');
 const pool = require('./db');
 const nodemailer = require('nodemailer');
 const OpenAI = require("openai");
+const path = require('path');
+const helmet = require('helmet');
 
 dotenv.config();
 
 const app = express();
 const corsOptions = {
-    origin: ['https://enrik33.github.io', 'http://localhost:4000'],
+    origin: [
+        'https://www.pompeatours.com',
+        'https://pompeatours.com',
+        'https://enrik33.github.io',
+        'http://localhost:4000'
+    ],
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type'],
 };
+
 app.use(cors(corsOptions));
 
 app.use(express.json());
 
 app.options('*', cors(corsOptions));
+
+app.get('/healthz', (req, res) => {
+    res.status(200).send('OK');
+});
+
+app.use(helmet());
 
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
@@ -446,6 +460,13 @@ app.get("/booked-dates", async (req, res) => {
     }
 });
 
+// Serve frontend
+app.use(express.static(path.join(__dirname, '..')));
+
+// Catch-all to return index.html for unknown routes (optional)
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '..', 'index.html'));
+});
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, '0.0.0.0', () => console.log(`Pompea AI backend running on port ${PORT}`));

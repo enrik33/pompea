@@ -95,13 +95,13 @@ window.onload = function () {
 
             // Assign a corresponding image (update with real images as needed)
             const tourImages = {
-                "Butrinti & Blue Eye": "../assets/images/Butrinti.jpg",
-                "Saranda & Gjirokastra": "../assets/images/Saranda.jpg",
-                "Museum Package": "../assets/images/Ksamil.avif",
-                "Permeti": "../assets/images/Ksamil.avif",
+                "Butrinti & Blue Eye": "../assets/images/butrinti_ruins.jpg",
+                "Saranda & Gjirokastra": "../assets/images/7a065141-9e1a-4e4b-a639-03786d67858e.jpg",
+                "Museum Package": "../assets/images/lekursi_view.jpg",
+                "Permeti": "../assets/images/permeti_cabove.avif",
                 "Himara": "../assets/images/Porto_Palermo.jpg",
                 "Gjirokastra + Blue Eye": "../assets/images/Blue_Eye.jpg",
-                "Butrinti & Saranda Highlights": "../assets/images/Saranda.jpg"
+                "Butrinti & Saranda Highlights": "../assets/images/Blue_Eye.jpg"
             };
 
             if (matchedTour && tourImages[matchedTour]) {
