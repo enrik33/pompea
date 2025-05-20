@@ -31,7 +31,24 @@ app.get('/healthz', (req, res) => {
     res.status(200).send('OK');
 });
 
-app.use(helmet());
+app.use(
+    helmet({
+        contentSecurityPolicy: {
+            directives: {
+                defaultSrc: ["'self'"],
+                scriptSrc: [
+                    "'self'",
+                    "https://code.jquery.com",    // ✅ allow jQuery CDN
+                    "'unsafe-inline'"             // ✅ allow inline scripts (like onclick handlers)
+                ],
+                styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+                imgSrc: ["'self'", "data:", "https:"],
+                fontSrc: ["'self'", "https://fonts.gstatic.com"],
+                connectSrc: ["'self'", "https://pompea-backend.onrender.com"], // adjust as needed
+            },
+        },
+    })
+);
 
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
