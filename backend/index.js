@@ -14,19 +14,19 @@ const corsOptions = {
     origin: [
         'https://www.pompeatours.com',
         'https://pompeatours.com',
-        'https://enrik33.github.io',
         'https://pompea-tours.onrender.com',
+        'https://enrik33.github.io',
         'http://localhost:4000'
     ],
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type'],
+    credentials: true
 };
 
 app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 
 app.use(express.json());
-
-app.options('*', cors(corsOptions));
 
 app.get('/healthz', (req, res) => {
     res.status(200).send('OK');
