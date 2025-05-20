@@ -43,6 +43,7 @@ app.use(
                     "https://cdn.jsdelivr.net",
                     "https://unpkg.com",
                     "https://www.paypal.com",
+                    "https://www.sandbox.paypal.com",
                     "'unsafe-inline'"
                 ],
                 styleSrc: [
@@ -55,11 +56,17 @@ app.use(
                 ],
                 fontSrc: ["'self'", "https://fonts.gstatic.com", "https://cdnjs.cloudflare.com"],
                 imgSrc: ["'self'", "data:", "https:"],
+                frameSrc: [
+                    "https://www.sandbox.paypal.com",
+                    "https://www.paypal.com",
+                    "https://www.google.com"
+                ],
                 connectSrc: [
                     "'self'",
-                    "https://pompea-tours.onrender.com"
+                    "https://pompea-tours.onrender.com",
+                    "https://nominatim.openstreetmap.org",
+                    "https://www.sandbox.paypal.com"
                 ],
-                frameSrc: ["https://www.google.com", "https://www.paypal.com"], // for PayPal and maps
                 scriptSrcAttr: ["'unsafe-inline'"], // fix inline handlers
             },
         },
