@@ -363,17 +363,17 @@ Instagram | Facebook
             attachments: [
                 {
                     filename: 'logua.jpg',
-                    path: __dirname + '/public/images/logua.jpg',
+                    path: path.join(__dirname, '../public/images/logua.jpg'),
                     cid: 'pompea-logo'
                 },
                 {
                     filename: 'instagram.svg',
-                    path: __dirname + '/public/images/instagram.svg',
+                    path: path.join(__dirname, '../public/images/instagram.svg'),
                     cid: 'instagram-icon'
                 },
                 {
                     filename: 'facebook.svg',
-                    path: __dirname + '/public/images/facebook.svg',
+                    path: path.join(__dirname, '../public/images/facebook.svg'),
                     cid: 'facebook-icon'
                 }
             ]
