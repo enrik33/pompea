@@ -354,18 +354,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
         paypal.Buttons({
             createOrder: async () => {
-                const res = await fetch(`${API_BASE_URL}/create-order`, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                        tourName: decodeURIComponent(tourName),
-                        groupSize,
-                        language
-                    })
-                });
+                try {
+                    const res = await fetch(`${API_BASE_URL}/create-order`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            tourName: decodeURIComponent(tourName),
+                            groupSize,
+                            language
+                        })
+                    });
 
-                const dataRes = await res.json();
-                return dataRes.id;
+                    const dataRes = await res.json();
+
+                    if (!res.ok || !dataRes.id) {
+                        throw new Error("Order creation failed: " + (dataRes.error || "Unknown error"));
+                    }
+
+                    return dataRes.id;
+                } catch (err) {
+                    console.error("❌ createOrder failed:", err);
+                    alert("Something went wrong creating your order. Please try again or contact support.");
+                    throw err; // Important: tell PayPal not to continue
+                }
             },
             onApprove: async (data, actions) => {
                 try {
