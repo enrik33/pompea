@@ -67,7 +67,7 @@ app.use(
                     "https://nominatim.openstreetmap.org",
                     "https://www.sandbox.paypal.com"
                 ],
-                scriptSrcAttr: ["'unsafe-inline'"], // fix inline handlers
+                scriptSrcAttr: ["'unsafe-inline'", "'unsafe-hashes'"], // fix inline handlers
             },
         },
     })
