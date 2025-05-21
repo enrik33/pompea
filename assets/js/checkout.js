@@ -460,8 +460,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Skip submitting if PayPal is selected — use the PayPal button instead
         if (paymentMethod === "paypal") {
-            alert("Please complete your payment using the PayPal button below.");
-            return;
+            // Prevent double-trigger: disable submit and remove default behavior
+            submitBtn.disabled = true;
+            alert("Please use the yellow PayPal button to complete your payment.");
+            return false; // optional, just to be sure
         }
 
         const data = {
