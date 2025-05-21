@@ -39,13 +39,18 @@ app.use(
                 defaultSrc: ["'self'"],
                 scriptSrc: [
                     "'self'",
+                    "'unsafe-inline'",
                     "https://code.jquery.com",
                     "https://cdn.jsdelivr.net",
                     "https://unpkg.com",
                     "https://www.paypal.com",
                     "https://www.sandbox.paypal.com",
-                    "'unsafe-inline'"
+                    "https://www.paypalobjects.com",
+                    "https://www.gstatic.com",
+                    "https://www.google.com",
+                    "https://*.doubleclick.net"
                 ],
+
                 styleSrc: [
                     "'self'",
                     "'unsafe-inline'",
@@ -54,22 +59,47 @@ app.use(
                     "https://cdn.jsdelivr.net",
                     "https://unpkg.com"
                 ],
-                fontSrc: ["'self'", "https://fonts.gstatic.com", "https://cdnjs.cloudflare.com"],
-                imgSrc: ["'self'", "data:", "https:"],
+
+                fontSrc: [
+                    "'self'",
+                    "https://fonts.gstatic.com",
+                    "https://cdnjs.cloudflare.com"
+                ],
+
+                imgSrc: [
+                    "'self'",
+                    "data:",
+                    "https:",
+                    "https://*.paypal.com",
+                    "https://*.paypalobjects.com",
+                    "https://*.googleusercontent.com",
+                    "https://*.gstatic.com",
+                    "https://*.doubleclick.net"
+                ],
+
                 frameSrc: [
-                    "https://www.sandbox.paypal.com",
+                    "'self'",
                     "https://www.paypal.com",
+                    "https://www.sandbox.paypal.com",
                     "https://www.google.com"
                 ],
+
                 connectSrc: [
                     "'self'",
                     "https://pompea-tours.onrender.com",
                     "https://nominatim.openstreetmap.org",
-                    "https://www.sandbox.paypal.com"
+                    "https://www.paypal.com",
+                    "https://www.sandbox.paypal.com",
+                    "https://api-m.sandbox.paypal.com",
+                    "https://postcollector.paypal.com",
+                    "https://www.google.com",
+                    "https://www.gstatic.com",
+                    "https://*.doubleclick.net"
                 ],
-                scriptSrcAttr: ["'unsafe-inline'", "'unsafe-hashes'"], // fix inline handlers
-            },
-        },
+
+                scriptSrcAttr: ["'unsafe-inline'", "'unsafe-hashes'"]
+            }
+        }
     })
 );
 
