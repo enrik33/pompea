@@ -353,14 +353,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         paypal.Buttons({
-            style: {
-                layout: 'vertical',
-                color: 'gold',
-                shape: 'rect',
-                label: 'paypal'
-            },
-            fundingSource: paypal.FUNDING.PAYPAL,
-            commit: true,
             createOrder: async () => {
                 try {
                     const res = await fetch(`${API_BASE_URL}/create-order`, {
