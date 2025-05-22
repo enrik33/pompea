@@ -353,6 +353,14 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         paypal.Buttons({
+            style: {
+                layout: 'vertical',
+                color: 'gold',
+                shape: 'rect',
+                label: 'paypal'
+            },
+            fundingSource: paypal.FUNDING.PAYPAL,
+            commit: true,
             createOrder: async () => {
                 try {
                     const res = await fetch(`${API_BASE_URL}/create-order`, {
@@ -373,7 +381,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     return dataRes.id;
                 } catch (err) {
-                    console.error("❌ createOrder failed:", err);
+                    console.error("createOrder failed:", err);
                     alert("Something went wrong creating your order. Please try again or contact support.");
                     throw err; // Important: tell PayPal not to continue
                 }
