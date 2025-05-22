@@ -37,6 +37,7 @@ app.use(
         contentSecurityPolicy: {
             directives: {
                 defaultSrc: ["'self'"],
+
                 scriptSrc: [
                     "'self'",
                     "'unsafe-inline'",
@@ -48,6 +49,8 @@ app.use(
                     "https://www.paypalobjects.com",
                     "https://www.gstatic.com",
                     "https://www.google.com",
+                    "https://*.paypal.com",
+                    "https://*.paypalobjects.com",
                     "https://*.doubleclick.net"
                 ],
 
@@ -81,6 +84,7 @@ app.use(
                     "'self'",
                     "https://www.paypal.com",
                     "https://www.sandbox.paypal.com",
+                    "https://www.paypalobjects.com",
                     "https://www.google.com"
                 ],
 
@@ -91,7 +95,14 @@ app.use(
                     "https://www.paypal.com",
                     "https://www.sandbox.paypal.com",
                     "https://api-m.sandbox.paypal.com",
+                    "https://api.paypal.com",
+                    "https://api.sandbox.paypal.com",
                     "https://postcollector.paypal.com",
+                    "https://browser-intake-us5-datadoghq.com",
+                    "https://*.paypal.com",
+                    "https://*.paypalobjects.com",
+                    "https://*.paypal.cn",
+                    "https://objects.paypal.cn",
                     "https://www.google.com",
                     "https://www.gstatic.com",
                     "https://*.doubleclick.net"
