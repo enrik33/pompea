@@ -505,6 +505,9 @@ app.post("/create-order", async (req, res) => {
         request.prefer("return=representation");
         request.requestBody({
             intent: "CAPTURE",
+            application_context: {
+                shipping_preference: "NO_SHIPPING"
+            },
             purchase_units: [{
                 amount: {
                     currency_code: "EUR",
